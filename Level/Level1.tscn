@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=4 uid="uid://cenl60q65u7y4"]
+[gd_scene load_steps=30 format=4 uid="uid://cenl60q65u7y4"]
 
 [ext_resource type="PackedScene" uid="uid://b1cv0rb0cx1wb" path="res://Player/player.tscn" id="1_n58pf"]
 [ext_resource type="Script" uid="uid://cecgssyk8b8i3" path="res://Level/enemies.gd" id="2_5gmx1"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://djcvryhkys4ic" path="res://Models/Exclamation sign/exclamation_sign_0.png" id="3_7lyb7"]
 [ext_resource type="Script" uid="uid://duk6qs2smbrtm" path="res://Test/canvas_layer.gd" id="4_7lyb7"]
 [ext_resource type="PackedScene" uid="uid://dimanlja5xjrp" path="res://Mission/startMission.tscn" id="6_terk3"]
+[ext_resource type="Shader" uid="uid://c3f2vv4jkfu6n" path="res://Shaders/Level1.gdshader" id="6_vf83r"]
 [ext_resource type="PackedScene" uid="uid://dpy1q6nkwpvvl" path="res://Mission/endMission.tscn" id="7_vf83r"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_n58pf"]
@@ -22,7 +23,6 @@ tonemap_mode = 2
 glow_enabled = true
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_n58pf"]
-albedo_color = Color(0.24115604, 0.24115604, 0.24115604, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_n58pf"]
 material = SubResource("StandardMaterial3D_n58pf")
@@ -30,7 +30,6 @@ material = SubResource("StandardMaterial3D_n58pf")
 [sub_resource type="BoxShape3D" id="BoxShape3D_1rv4e"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jsoud"]
-albedo_color = Color(0.2231029, 0.2231029, 0.22310287, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_5gmx1"]
 material = SubResource("StandardMaterial3D_jsoud")
@@ -118,6 +117,14 @@ shadow_mesh = SubResource("ArrayMesh_ttgas")
 [sub_resource type="SphereShape3D" id="SphereShape3D_ai77n"]
 radius = 5.111404
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_sxufl"]
+shader = ExtResource("6_vf83r")
+shader_parameter/contrast = 1.8
+shader_parameter/brightness = -0.1
+shader_parameter/steps = 4.0
+shader_parameter/grain_strength = 0.05
+shader_parameter/tint = Color(0.9, 0.9, 1, 1)
+
 [sub_resource type="Animation" id="Animation_ics5d"]
 resource_name = "Enemy1_movement"
 length = 4.0
@@ -159,7 +166,8 @@ _data = {
 [node name="Level1" type="Node3D"]
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(-0.96409535, 0.18246035, -0.19294642, 0, 0.72657466, 0.6870875, 0.26555622, 0.6624178, -0.70048726, 0, 0, 0)
+transform = Transform3D(-0.9640954, 0.18246037, -0.19294645, 0, 0.7265747, 0.68708754, 0.26555625, 0.6624179, -0.7004873, 4.7105427, 3.9980867, 0)
+light_energy = 0.2
 shadow_enabled = true
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
@@ -270,6 +278,14 @@ omni_range = 12.259343
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 script = ExtResource("4_7lyb7")
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+material = SubResource("ShaderMaterial_sxufl")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="Control" type="Control" parent="CanvasLayer"]
 layout_mode = 3
