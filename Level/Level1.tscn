@@ -1,13 +1,16 @@
-[gd_scene load_steps=30 format=4 uid="uid://cenl60q65u7y4"]
+[gd_scene load_steps=27 format=4 uid="uid://cenl60q65u7y4"]
 
+[ext_resource type="Script" uid="uid://b1hewj5ikpxxv" path="res://Level/level_1.gd" id="1_di76u"]
 [ext_resource type="PackedScene" uid="uid://b1cv0rb0cx1wb" path="res://Player/player.tscn" id="1_n58pf"]
 [ext_resource type="Script" uid="uid://cecgssyk8b8i3" path="res://Level/enemies.gd" id="2_5gmx1"]
 [ext_resource type="Script" uid="uid://2jol6ey2w8wf" path="res://MafiaEnemy/enemy_1.gd" id="2_ai77n"]
+[ext_resource type="PackedScene" uid="uid://c0qt65k2g2x7l" path="res://Props/edificio.tscn" id="2_d5det"]
 [ext_resource type="Texture2D" uid="uid://djcvryhkys4ic" path="res://Models/Exclamation sign/exclamation_sign_0.png" id="3_7lyb7"]
 [ext_resource type="Script" uid="uid://duk6qs2smbrtm" path="res://Test/canvas_layer.gd" id="4_7lyb7"]
 [ext_resource type="PackedScene" uid="uid://dimanlja5xjrp" path="res://Mission/startMission.tscn" id="6_terk3"]
 [ext_resource type="Shader" uid="uid://c3f2vv4jkfu6n" path="res://Shaders/Level1.gdshader" id="6_vf83r"]
 [ext_resource type="PackedScene" uid="uid://dpy1q6nkwpvvl" path="res://Mission/endMission.tscn" id="7_vf83r"]
+[ext_resource type="MeshLibrary" uid="uid://c2n5a1e1ys3oe" path="res://Meshlib/bedrock.tres" id="10_di76u"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_n58pf"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -21,20 +24,8 @@ sky = SubResource("Sky_1rv4e")
 ambient_light_source = 2
 tonemap_mode = 2
 glow_enabled = true
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_n58pf"]
-
-[sub_resource type="BoxMesh" id="BoxMesh_n58pf"]
-material = SubResource("StandardMaterial3D_n58pf")
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_1rv4e"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jsoud"]
-
-[sub_resource type="BoxMesh" id="BoxMesh_5gmx1"]
-material = SubResource("StandardMaterial3D_jsoud")
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_ics5d"]
+glow_bloom = 0.5
+glow_hdr_threshold = 0.6
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_2w30r"]
 
@@ -164,6 +155,8 @@ _data = {
 }
 
 [node name="Level1" type="Node3D"]
+script = ExtResource("1_di76u")
+building_scene = ExtResource("2_d5det")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.9640954, 0.18246037, -0.19294645, 0, 0.7265747, 0.68708754, 0.26555625, 0.6624179, -0.7004873, 4.7105427, 3.9980867, 0)
@@ -174,58 +167,10 @@ shadow_enabled = true
 environment = SubResource("Environment_ai77n")
 
 [node name="Player" parent="." instance=ExtResource("1_n58pf")]
-transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 9.03336, 2, 0)
-
-[node name="Scenario" type="Node3D" parent="."]
-
-[node name="Floor" type="Node3D" parent="Scenario"]
-
-[node name="Floor" type="StaticBody3D" parent="Scenario/Floor"]
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Scenario/Floor/Floor"]
-transform = Transform3D(30.845316, 0, 0, 0, 1, 0, 0, 0, 13.241261, -2.891652, 0, 0)
-mesh = SubResource("BoxMesh_n58pf")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Scenario/Floor/Floor"]
-transform = Transform3D(30.845316, 0, 0, 0, 1, 0, 0, 0, 13.241261, -2.891652, 0, 0)
-shape = SubResource("BoxShape3D_1rv4e")
-
-[node name="Casino" type="Node3D" parent="Scenario"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.549352, 2.4997964, 0)
-
-[node name="Label3D" type="Label3D" parent="Scenario/Casino"]
-billboard = 1
-text = "Aqui va a estar el casino"
-
-[node name="Walls" type="Node3D" parent="Scenario"]
-
-[node name="Wall1" type="StaticBody3D" parent="Scenario/Walls"]
-transform = Transform3D(-0.9999999, 0, -8.742276e-08, 0, 1, 0, 8.742276e-08, 0, -0.9999999, 4.1618824, 0.7011545, -2.433823)
-collision_layer = 7
-collision_mask = 7
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Scenario/Walls/Wall1"]
-transform = Transform3D(8.047035, 0, 0, 0, 2.9915872, 0, 0, 0, 1, 0, 0, 0)
-mesh = SubResource("BoxMesh_5gmx1")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Scenario/Walls/Wall1"]
-transform = Transform3D(8.047035, 0, 0, 0, 2.9915872, 0, 0, 0, 1, 0, 0, 0)
-shape = SubResource("BoxShape3D_ics5d")
-
-[node name="Wall2" type="StaticBody3D" parent="Scenario/Walls"]
-transform = Transform3D(-0.9999999, 0, -8.742276e-08, 0, 1, 0, 8.742276e-08, 0, -0.9999999, -6.0089674, 0.7011545, -2.433823)
-collision_layer = 7
-collision_mask = 7
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Scenario/Walls/Wall2"]
-transform = Transform3D(8.047035, 0, 0, 0, 2.9915872, 0, 0, 0, 1, 0, 0, 0)
-mesh = SubResource("BoxMesh_5gmx1")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Scenario/Walls/Wall2"]
-transform = Transform3D(8.047035, 0, 0, 0, 2.9915872, 0, 0, 0, 1, 0, 0, 0)
-shape = SubResource("BoxShape3D_ics5d")
+transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 0, 1.5300417, 0)
 
 [node name="Enemies" type="Node3D" parent="."]
+visible = false
 script = ExtResource("2_5gmx1")
 
 [node name="Enemy1" type="Node3D" parent="Enemies"]
@@ -323,3 +268,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.531558, 0.77874947, 2.77165
 
 [node name="EndMission" parent="." instance=ExtResource("7_vf83r")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.188631, 0.7771902, 0)
+
+[node name="GridMap" type="GridMap" parent="."]
+mesh_library = ExtResource("10_di76u")
+cell_size = Vector3(1, 1, 1)
+collision_mask = 3
+data = {
+"cells": PackedInt32Array(65524, 4, 720897, 65524, 5, 720897)
+}
+metadata/_editor_floor_ = Vector3(0, 0, 0)
