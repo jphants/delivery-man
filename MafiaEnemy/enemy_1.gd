@@ -9,6 +9,7 @@ const bullet_scene = preload("uid://dsuxhbxij7r3s")
 @export_range(0.0, 1.0) var accuracy := 0.75
 @export var max_spread_deg := 10.0
 @export var eye_height := 0
+@export var detection_area: Area3D
 
 enum Team {
 	NONE,
@@ -39,6 +40,19 @@ func _ready() -> void:
 	raycast.enabled = true
 	randomize()
 
+	if detection_area:
+		detection_area.body_entered.connect(_on_detection_body_entered)
+		detection_area.body_exited.connect(_on_detection_body_exited)
+	else:
+		push_warning("Enemy sin detection_area asignada")
+
+func _on_detection_body_entered(body: Node3D) -> void:
+	if body.has_method("get_team") and body.get_team() != team:
+		target = body
+
+func _on_detection_body_exited(body: Node3D) -> void:
+	if body == target:
+		target = null
 
 func _physics_process(delta: float) -> void:
 	if not is_on_floor():
@@ -120,12 +134,3 @@ func can_see_target() -> bool:
 		return true
 
 	return false
-
-func _on_area_3d_body_entered(body: Node3D) -> void:
-	if body.has_method("get_team") and body.get_team() != team:
-		target = body
-
-
-func _on_area_3d_body_exited(body: Node3D) -> void:
-	if body == target:
-		target = null

@@ -10,6 +10,11 @@ enum Team {
 @onready var camera_pivot: Node3D = $CameraPivot
 @onready var camera_3d: Camera3D = $CameraPivot/Camera3D
 @onready var label_3d: Label3D = $Label3D
+@onready var mesh: MeshInstance3D = $MeshInstance3D
+
+const MESH_Y_OFFSET := +PI / 2
+
+const TURN_SPEED := 10.0
 
 const SPEED := 5.0
 const JUMP_VELOCITY := 4.5
@@ -74,6 +79,7 @@ func _ready():
 
 func _physics_process(delta: float) -> void:
 	label_3d.text = str(get_team())
+
 	# Gravedad
 	if not is_on_floor():
 		velocity += get_gravity() * delta
@@ -86,6 +92,7 @@ func _physics_process(delta: float) -> void:
 
 	# Movimiento relativo a la cámara
 	var input_dir := Input.get_vector("ui_left", "ui_right", "ui_down", "ui_up")
+
 	if input_dir.length() > 0:
 		var basis := camera_pivot.global_transform.basis
 		var forward := -basis.z
@@ -97,5 +104,13 @@ func _physics_process(delta: float) -> void:
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 		velocity.z = move_toward(velocity.z, 0, SPEED)
+
+	# 🔥 ROTAR SOLO EL MESH HACIA DONDE SE MUEVE
+	var horizontal_vel := Vector3(velocity.x, 0, velocity.z)
+
+	if horizontal_vel.length() > 0.05:
+		var target_yaw := atan2(-horizontal_vel.x, -horizontal_vel.z)
+
+		mesh.rotation.y = lerp_angle(mesh.rotation.y, target_yaw, TURN_SPEED * delta)
 
 	move_and_slide()

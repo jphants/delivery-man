@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://dimanlja5xjrp"]
+
+[ext_resource type="Script" uid="uid://brh2m7ckthpg2" path="res://Test/start_timer.gd" id="1_kyvnd"]
+[ext_resource type="PackedScene" uid="uid://ctpc1gr3a3yds" path="res://Models/Green sign/exclamation_sign.gltf" id="2_n6w2w"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_vnkr1"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_sbq1r"]
+
+[node name="StartTimer" type="Node3D"]
+script = ExtResource("1_kyvnd")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_vnkr1")
+
+[node name="Area3D" type="Area3D" parent="."]
+transform = Transform3D(2.16, 0, 0, 0, 2.16, 0, 0, 0, 2.16, 0, 0, 0)
+collision_layer = 8
+collision_mask = 10
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("BoxShape3D_sbq1r")
+debug_color = Color(0, 0.6039216, 0.70980394, 1)
+
+[node name="Sign" parent="." instance=ExtResource("2_n6w2w")]
+transform = Transform3D(0.415, 0, 0, 0, 0.415, 0, 0, 0, 0.415, 0, 1.6972055, 0)
+visible = false
+
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
+[connection signal="body_exited" from="Area3D" to="." method="_on_area_3d_body_exited"]

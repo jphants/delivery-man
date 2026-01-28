@@ -1,32 +1,45 @@
-[gd_scene load_steps=25 format=4 uid="uid://xnq3t2rwfmhm"]
+[gd_scene load_steps=28 format=4 uid="uid://cenl60q65u7y4"]
 
-[ext_resource type="Script" uid="uid://b6xdpje3e4vh4" path="res://Test/test_scene.gd" id="1_u5yuk"]
-[ext_resource type="PackedScene" uid="uid://b1cv0rb0cx1wb" path="res://Player/player.tscn" id="2_3ofr5"]
-[ext_resource type="Script" uid="uid://2jol6ey2w8wf" path="res://MafiaEnemy/enemy_1.gd" id="2_jsoud"]
-[ext_resource type="PackedScene" uid="uid://6qjurfsexb5y" path="res://MafiaEnemy/mafiaEnemy.tscn" id="3_3e64s"]
-[ext_resource type="Texture2D" uid="uid://djcvryhkys4ic" path="res://Models/Exclamation sign/exclamation_sign_0.png" id="3_d38du"]
-[ext_resource type="Script" uid="uid://dir2tci2ggaut" path="res://Test/cabin.gd" id="5_0s61m"]
-[ext_resource type="PackedScene" uid="uid://dimanlja5xjrp" path="res://Mission/startMission.tscn" id="7_3ofr5"]
-[ext_resource type="PackedScene" uid="uid://dpy1q6nkwpvvl" path="res://Mission/endMission.tscn" id="8_3e64s"]
-[ext_resource type="Script" uid="uid://duk6qs2smbrtm" path="res://Test/canvas_layer.gd" id="8_sbq1r"]
+[ext_resource type="PackedScene" uid="uid://b1cv0rb0cx1wb" path="res://Player/player.tscn" id="1_n58pf"]
+[ext_resource type="Script" uid="uid://cecgssyk8b8i3" path="res://Level/enemies.gd" id="2_5gmx1"]
+[ext_resource type="Script" uid="uid://2jol6ey2w8wf" path="res://MafiaEnemy/enemy_1.gd" id="2_ai77n"]
+[ext_resource type="Texture2D" uid="uid://djcvryhkys4ic" path="res://Models/Exclamation sign/exclamation_sign_0.png" id="3_7lyb7"]
+[ext_resource type="Script" uid="uid://duk6qs2smbrtm" path="res://Test/canvas_layer.gd" id="4_7lyb7"]
+[ext_resource type="PackedScene" uid="uid://dimanlja5xjrp" path="res://Mission/startMission.tscn" id="6_terk3"]
+[ext_resource type="PackedScene" uid="uid://dpy1q6nkwpvvl" path="res://Mission/endMission.tscn" id="7_vf83r"]
 
-[sub_resource type="BoxMesh" id="BoxMesh_u5yuk"]
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_n58pf"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_0s61m"]
+[sub_resource type="Sky" id="Sky_1rv4e"]
+sky_material = SubResource("ProceduralSkyMaterial_n58pf")
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6blvm"]
+[sub_resource type="Environment" id="Environment_ai77n"]
+sky = SubResource("Sky_1rv4e")
+ambient_light_source = 2
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_n58pf"]
+albedo_color = Color(0.24115604, 0.24115604, 0.24115604, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_n58pf"]
+material = SubResource("StandardMaterial3D_n58pf")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_1rv4e"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jsoud"]
 albedo_color = Color(0.2231029, 0.2231029, 0.22310287, 1)
 
-[sub_resource type="BoxMesh" id="BoxMesh_2w30r"]
-material = SubResource("StandardMaterial3D_6blvm")
+[sub_resource type="BoxMesh" id="BoxMesh_5gmx1"]
+material = SubResource("StandardMaterial3D_jsoud")
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_d38du"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_ics5d"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_2w30r"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_jsoud"]
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_u5yuk"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vsjm0"]
 resource_name = "material_0"
@@ -34,7 +47,7 @@ transparency = 2
 alpha_scissor_threshold = 0.05
 alpha_antialiasing_mode = 0
 cull_mode = 2
-albedo_texture = ExtResource("3_d38du")
+albedo_texture = ExtResource("3_7lyb7")
 texture_filter = 0
 texture_repeat = false
 
@@ -102,182 +115,157 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_ttgas")
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_v6t21"]
+[sub_resource type="SphereShape3D" id="SphereShape3D_ai77n"]
+radius = 5.111404
 
-[sub_resource type="BoxMesh" id="BoxMesh_0s61m"]
+[sub_resource type="Animation" id="Animation_ics5d"]
+resource_name = "Enemy1_movement"
+length = 4.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Enemies/Enemy1:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2, 4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 1.3690057, 0), Vector3(-8.541356, 1.3690057, 0), Vector3(0, 1.2406979, 0)]
+}
 
-[node name="TestScene" type="Node3D"]
-script = ExtResource("1_u5yuk")
+[sub_resource type="Animation" id="Animation_terk3"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Enemies/Enemy1:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 1.3690057, 0)]
+}
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_vf83r"]
+_data = {
+&"Enemy1_movement": SubResource("Animation_ics5d"),
+&"RESET": SubResource("Animation_terk3")
+}
+
+[node name="Level1" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_ai77n")
+
+[node name="Player" parent="." instance=ExtResource("1_n58pf")]
+transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 9.03336, 2, 0)
+
+[node name="Scenario" type="Node3D" parent="."]
+
+[node name="Floor" type="Node3D" parent="Scenario"]
+
+[node name="Floor" type="StaticBody3D" parent="Scenario/Floor"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Scenario/Floor/Floor"]
+transform = Transform3D(30.845316, 0, 0, 0, 1, 0, 0, 0, 13.241261, -2.891652, 0, 0)
+mesh = SubResource("BoxMesh_n58pf")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Scenario/Floor/Floor"]
+transform = Transform3D(30.845316, 0, 0, 0, 1, 0, 0, 0, 13.241261, -2.891652, 0, 0)
+shape = SubResource("BoxShape3D_1rv4e")
+
+[node name="Casino" type="Node3D" parent="Scenario"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.549352, 2.4997964, 0)
+
+[node name="Label3D" type="Label3D" parent="Scenario/Casino"]
+billboard = 1
+text = "Aqui va a estar el casino"
+
+[node name="Walls" type="Node3D" parent="Scenario"]
+
+[node name="Wall1" type="StaticBody3D" parent="Scenario/Walls"]
+transform = Transform3D(-0.9999999, 0, -8.742276e-08, 0, 1, 0, 8.742276e-08, 0, -0.9999999, 4.1618824, 0.7011545, -2.433823)
+collision_layer = 7
+collision_mask = 7
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Scenario/Walls/Wall1"]
+transform = Transform3D(8.047035, 0, 0, 0, 2.9915872, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("BoxMesh_5gmx1")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Scenario/Walls/Wall1"]
+transform = Transform3D(8.047035, 0, 0, 0, 2.9915872, 0, 0, 0, 1, 0, 0, 0)
+shape = SubResource("BoxShape3D_ics5d")
+
+[node name="Wall2" type="StaticBody3D" parent="Scenario/Walls"]
+transform = Transform3D(-0.9999999, 0, -8.742276e-08, 0, 1, 0, 8.742276e-08, 0, -0.9999999, -6.0089674, 0.7011545, -2.433823)
+collision_layer = 7
+collision_mask = 7
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Scenario/Walls/Wall2"]
+transform = Transform3D(8.047035, 0, 0, 0, 2.9915872, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("BoxMesh_5gmx1")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Scenario/Walls/Wall2"]
+transform = Transform3D(8.047035, 0, 0, 0, 2.9915872, 0, 0, 0, 1, 0, 0, 0)
+shape = SubResource("BoxShape3D_ics5d")
+
+[node name="Enemies" type="Node3D" parent="."]
+script = ExtResource("2_5gmx1")
+
+[node name="Enemy1" type="Node3D" parent="Enemies"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3690057, 0)
+
+[node name="Enemy1" type="CharacterBody3D" parent="Enemies/Enemy1" node_paths=PackedStringArray("detection_area")]
+transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 0, 0, 0)
+collision_layer = 4
+script = ExtResource("2_ai77n")
+max_spread_deg = 15.0
+detection_area = NodePath("../Area3D")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Enemies/Enemy1/Enemy1"]
+shape = SubResource("BoxShape3D_2w30r")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Enemies/Enemy1/Enemy1"]
+mesh = SubResource("BoxMesh_jsoud")
+
+[node name="blockbench_export" type="Node3D" parent="Enemies/Enemy1/Enemy1"]
+transform = Transform3D(0.26, 0, 0, 0, 0.26, 0, 0, 0, 0.26, 0, 0.85733867, 0)
+visible = false
+
+[node name="sphere" type="MeshInstance3D" parent="Enemies/Enemy1/Enemy1/blockbench_export"]
+mesh = SubResource("ArrayMesh_bq0um")
+skeleton = NodePath("")
+
+[node name="cylinder" type="MeshInstance3D" parent="Enemies/Enemy1/Enemy1/blockbench_export"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.625, 0)
+mesh = SubResource("ArrayMesh_p7yei")
+skeleton = NodePath("")
+
+[node name="RayCast3D" type="RayCast3D" parent="Enemies/Enemy1/Enemy1"]
+transform = Transform3D(-4.371139e-08, -4.4520507, 0, 1, -1.9460532e-07, 0, 0, 0, 1, 0, 0, 0)
+collision_mask = 3
+debug_shape_thickness = 5
+
+[node name="Area3D" type="Area3D" parent="Enemies/Enemy1"]
+collision_layer = 7
+collision_mask = 7
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Enemies/Enemy1/Area3D"]
+shape = SubResource("SphereShape3D_ai77n")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Enemies/Enemy1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8434772, 0)
+light_color = Color(1, 1, 0, 1)
+light_energy = 1.03
 shadow_enabled = true
-
-[node name="Player" parent="." instance=ExtResource("2_3ofr5")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3361194, 0)
-
-[node name="Floor" type="StaticBody3D" parent="."]
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Floor"]
-transform = Transform3D(23.477583, 0, 0, 0, 1, 0, 0, 0, 22.473417, 0, 0, 0)
-mesh = SubResource("BoxMesh_u5yuk")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor"]
-transform = Transform3D(23.477583, 0, 0, 0, 1, 0, 0, 0, 22.473417, 0, 0, 0)
-shape = SubResource("BoxShape3D_0s61m")
-
-[node name="Wall2" type="StaticBody3D" parent="."]
-transform = Transform3D(-4.3711385e-08, 0, 0.99999994, 0, 1, 0, -0.99999994, 0, -4.3711385e-08, -1.2037859, 0.7011545, -3.3078914)
-collision_layer = 7
-collision_mask = 7
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Wall2"]
-transform = Transform3D(8.047035, 0, 0, 0, 2.9915872, 0, 0, 0, 1, 0, 0, 0)
-mesh = SubResource("BoxMesh_2w30r")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Wall2"]
-transform = Transform3D(8.047035, 0, 0, 0, 2.9915872, 0, 0, 0, 1, 0, 0, 0)
-shape = SubResource("BoxShape3D_d38du")
-
-[node name="Enemy1" parent="." instance=ExtResource("3_3e64s")]
-transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -7.7441306, 1.9963183, 3.092288)
-
-[node name="Enemy2" type="CharacterBody3D" parent="."]
-transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -7.7441306, 1.9963183, 5.069296)
-collision_layer = 4
-script = ExtResource("2_jsoud")
-team = 2
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Enemy2"]
-shape = SubResource("BoxShape3D_2w30r")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Enemy2"]
-mesh = SubResource("BoxMesh_jsoud")
-
-[node name="Area3D" type="Area3D" parent="Enemy2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.292614, 0, 0)
-collision_mask = 7
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Enemy2/Area3D"]
-transform = Transform3D(3.9545784, 0, 0, 0, 1, 0, 0, 0, 1, 1.2825918, 0, 0)
-shape = SubResource("BoxShape3D_u5yuk")
-debug_color = Color(0.85955715, 0.34314278, 0.31817955, 1)
-
-[node name="blockbench_export" type="Node3D" parent="Enemy2"]
-transform = Transform3D(0.26, 0, 0, 0, 0.26, 0, 0, 0, 0.26, 0, 0.85733867, 0)
-visible = false
-
-[node name="sphere" type="MeshInstance3D" parent="Enemy2/blockbench_export"]
-mesh = SubResource("ArrayMesh_bq0um")
-skeleton = NodePath("")
-
-[node name="cylinder" type="MeshInstance3D" parent="Enemy2/blockbench_export"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.625, 0)
-mesh = SubResource("ArrayMesh_p7yei")
-skeleton = NodePath("")
-
-[node name="RayCast3D" type="RayCast3D" parent="Enemy2"]
-transform = Transform3D(-4.371139e-08, -4.4520507, 0, 1, -1.9460532e-07, 0, 0, 0, 1, 0, 0, 0)
-collision_mask = 3
-debug_shape_thickness = 5
-
-[node name="Enemy3" type="CharacterBody3D" parent="."]
-transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -7.7441306, 1.9963183, 7.2361517)
-collision_layer = 4
-script = ExtResource("2_jsoud")
-team = 3
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Enemy3"]
-shape = SubResource("BoxShape3D_2w30r")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Enemy3"]
-mesh = SubResource("BoxMesh_jsoud")
-
-[node name="Area3D" type="Area3D" parent="Enemy3"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.292614, 0, 0)
-collision_mask = 7
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Enemy3/Area3D"]
-transform = Transform3D(3.9545784, 0, 0, 0, 1, 0, 0, 0, 1, 1.2825918, 0, 0)
-shape = SubResource("BoxShape3D_u5yuk")
-debug_color = Color(0.85955715, 0.34314278, 0.31817955, 1)
-
-[node name="blockbench_export" type="Node3D" parent="Enemy3"]
-transform = Transform3D(0.26, 0, 0, 0, 0.26, 0, 0, 0, 0.26, 0, 0.85733867, 0)
-visible = false
-
-[node name="sphere" type="MeshInstance3D" parent="Enemy3/blockbench_export"]
-mesh = SubResource("ArrayMesh_bq0um")
-skeleton = NodePath("")
-
-[node name="cylinder" type="MeshInstance3D" parent="Enemy3/blockbench_export"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.625, 0)
-mesh = SubResource("ArrayMesh_p7yei")
-skeleton = NodePath("")
-
-[node name="RayCast3D" type="RayCast3D" parent="Enemy3"]
-transform = Transform3D(-4.371139e-08, -4.4520507, 0, 1, -1.9460532e-07, 0, 0, 0, 1, 0, 0, 0)
-collision_mask = 3
-debug_shape_thickness = 5
-
-[node name="Cabin" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6758847, 1.0790856, 4.468414)
-script = ExtResource("5_0s61m")
-target_team = 1
-
-[node name="Area3D" type="Area3D" parent="Cabin"]
-collision_layer = 7
-collision_mask = 7
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Cabin/Area3D"]
-shape = SubResource("BoxShape3D_v6t21")
-debug_color = Color(0.88235295, 0.07450981, 0.7882353, 1)
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Cabin"]
-mesh = SubResource("BoxMesh_0s61m")
-
-[node name="Cabin2" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6758847, 1.0790856, 5.914415)
-script = ExtResource("5_0s61m")
-target_team = 2
-
-[node name="Area3D" type="Area3D" parent="Cabin2"]
-collision_layer = 7
-collision_mask = 7
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Cabin2/Area3D"]
-shape = SubResource("BoxShape3D_v6t21")
-debug_color = Color(0.88235295, 0.07450981, 0.7882353, 1)
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Cabin2"]
-mesh = SubResource("BoxMesh_0s61m")
-
-[node name="Cabin3" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6758847, 1.0790856, 7.464426)
-script = ExtResource("5_0s61m")
-target_team = 3
-
-[node name="Area3D" type="Area3D" parent="Cabin3"]
-collision_layer = 7
-collision_mask = 7
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Cabin3/Area3D"]
-shape = SubResource("BoxShape3D_v6t21")
-debug_color = Color(0.88235295, 0.07450981, 0.7882353, 1)
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Cabin3"]
-mesh = SubResource("BoxMesh_0s61m")
-
-[node name="StartTimer" parent="." instance=ExtResource("7_3ofr5")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.6538434, 1.0259652, 1.6891727)
-
-[node name="EndMission" parent="." instance=ExtResource("8_3e64s")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.58491, 1.0259652, 1.6359739)
-
-[node name="GameManager" type="Node3D" parent="."]
+omni_range = 12.259343
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
-script = ExtResource("8_sbq1r")
+script = ExtResource("4_7lyb7")
 
 [node name="Control" type="Control" parent="CanvasLayer"]
 layout_mode = 3
@@ -305,50 +293,13 @@ theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 7
 text = "Health: 100"
 
-[node name="Enemy4" type="CharacterBody3D" parent="."]
-transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -7.7441306, 1.9963183, -0.4764638)
-collision_layer = 4
-script = ExtResource("2_jsoud")
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_vf83r")
+}
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Enemy4"]
-shape = SubResource("BoxShape3D_2w30r")
+[node name="StartTimer" parent="." instance=ExtResource("6_terk3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.531558, 0.77874947, 2.7716575)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Enemy4"]
-mesh = SubResource("BoxMesh_jsoud")
-
-[node name="Area3D" type="Area3D" parent="Enemy4"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.292614, 0, 0)
-collision_mask = 7
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Enemy4/Area3D"]
-transform = Transform3D(3.9545784, 0, 0, 0, 1, 0, 0, 0, 1, 1.2825918, 0, 0)
-shape = SubResource("BoxShape3D_u5yuk")
-debug_color = Color(0.85955715, 0.34314278, 0.31817955, 1)
-
-[node name="blockbench_export" type="Node3D" parent="Enemy4"]
-transform = Transform3D(0.26, 0, 0, 0, 0.26, 0, 0, 0, 0.26, 0, 0.85733867, 0)
-visible = false
-
-[node name="sphere" type="MeshInstance3D" parent="Enemy4/blockbench_export"]
-mesh = SubResource("ArrayMesh_bq0um")
-skeleton = NodePath("")
-
-[node name="cylinder" type="MeshInstance3D" parent="Enemy4/blockbench_export"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.625, 0)
-mesh = SubResource("ArrayMesh_p7yei")
-skeleton = NodePath("")
-
-[node name="RayCast3D" type="RayCast3D" parent="Enemy4"]
-transform = Transform3D(-4.371139e-08, -4.4520507, 0, 1, -1.9460532e-07, 0, 0, 0, 1, 0, 0, 0)
-collision_mask = 3
-debug_shape_thickness = 5
-
-[connection signal="body_entered" from="Enemy2/Area3D" to="Enemy2" method="_on_area_3d_body_entered"]
-[connection signal="body_exited" from="Enemy2/Area3D" to="Enemy2" method="_on_area_3d_body_exited"]
-[connection signal="body_entered" from="Enemy3/Area3D" to="Enemy3" method="_on_area_3d_body_entered"]
-[connection signal="body_exited" from="Enemy3/Area3D" to="Enemy3" method="_on_area_3d_body_exited"]
-[connection signal="body_entered" from="Cabin/Area3D" to="Cabin" method="_on_area_3d_body_entered"]
-[connection signal="body_entered" from="Cabin2/Area3D" to="Cabin2" method="_on_area_3d_body_entered"]
-[connection signal="body_entered" from="Cabin3/Area3D" to="Cabin3" method="_on_area_3d_body_entered"]
-[connection signal="body_entered" from="Enemy4/Area3D" to="Enemy4" method="_on_area_3d_body_entered"]
-[connection signal="body_exited" from="Enemy4/Area3D" to="Enemy4" method="_on_area_3d_body_exited"]
+[node name="EndMission" parent="." instance=ExtResource("7_vf83r")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.188631, 0.7771902, 0)
