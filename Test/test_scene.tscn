@@ -141,6 +141,9 @@ mesh = SubResource("BoxMesh_d38du")
 [node name="Camera3D" type="Camera3D" parent="Player/CameraPivot"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.7512352, 3.1981208)
 
+[node name="Label3D" type="Label3D" parent="Player"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.91834736, 0)
+
 [node name="Floor" type="StaticBody3D" parent="."]
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Floor"]
@@ -283,6 +286,7 @@ debug_shape_thickness = 5
 [node name="Cabin" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6758847, 1.0790856, 4.468414)
 script = ExtResource("5_0s61m")
+target_team = 1
 
 [node name="Area3D" type="Area3D" parent="Cabin"]
 collision_layer = 7
@@ -298,6 +302,7 @@ mesh = SubResource("BoxMesh_0s61m")
 [node name="Cabin2" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6758847, 1.0790856, 5.914415)
 script = ExtResource("5_0s61m")
+target_team = 2
 
 [node name="Area3D" type="Area3D" parent="Cabin2"]
 collision_layer = 7
@@ -313,6 +318,7 @@ mesh = SubResource("BoxMesh_0s61m")
 [node name="Cabin3" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6758847, 1.0790856, 7.464426)
 script = ExtResource("5_0s61m")
+target_team = 3
 
 [node name="Area3D" type="Area3D" parent="Cabin3"]
 collision_layer = 7

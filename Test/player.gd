@@ -9,6 +9,7 @@ enum Team {
 
 @onready var camera_pivot: Node3D = $CameraPivot
 @onready var camera_3d: Camera3D = $CameraPivot/Camera3D
+@onready var label_3d: Label3D = $Label3D
 
 const SPEED := 5.0
 const JUMP_VELOCITY := 4.5
@@ -56,6 +57,7 @@ func _ready():
 	camera_3d.look_at(global_position, Vector3.UP)
 
 func _physics_process(delta: float) -> void:
+	label_3d.text = str(get_team())
 	# Gravedad
 	if not is_on_floor():
 		velocity += get_gravity() * delta

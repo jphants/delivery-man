@@ -9,7 +9,7 @@ enum Team {
 	TEAM3
 }
 
-@export var target_team: Team = Team.TEAM1
+@export var target_team: Team
 
 
 func _ready() -> void:
@@ -17,6 +17,6 @@ func _ready() -> void:
 
 func _on_area_3d_body_entered(body: Node3D) -> void:
 	# Verifica que el body tenga team y método setter
-	print(body.name)
 	if body.has_method("set_team"):
+		print(body.name, "Team has been set")
 		body.set_team(target_team)
