@@ -7,6 +7,12 @@ enum Team {
 	TEAM3
 }
 
+var mesh_base_position: Vector3
+var bob_time := 0.0
+
+#TEAM MESHES
+@onready var russian_mesh: MeshInstance3D = $MeshInstance3D/RussianMesh
+
 @onready var camera_pivot: Node3D = $CameraPivot
 @onready var camera_3d: Camera3D = $CameraPivot/Camera3D
 @onready var label_3d: Label3D = $Label3D
@@ -76,8 +82,11 @@ func get_team() -> Team:
 func _ready():
 	target_rotation_y = camera_pivot.rotation.y
 	camera_3d.look_at(global_position, Vector3.UP)
+	mesh_base_position = mesh.position
+
 
 func _physics_process(delta: float) -> void:
+	
 	label_3d.text = str(get_team())
 
 	# Gravedad
@@ -112,5 +121,20 @@ func _physics_process(delta: float) -> void:
 		var target_yaw := atan2(-horizontal_vel.x, -horizontal_vel.z)
 
 		mesh.rotation.y = lerp_angle(mesh.rotation.y, target_yaw, TURN_SPEED * delta)
+
+	# 🟢 EFECTO DE SALTITOS DEL MESH
+	var is_moving := horizontal_vel.length() > 0.05
+
+	if is_moving:
+		bob_time += delta * 40.0 # velocidad del temblor
+
+		var y_offset := sin(bob_time) * 0.08
+		var x_offset := 0
+
+		mesh.position = mesh_base_position + Vector3(x_offset, y_offset, 0)
+	else:
+		bob_time = 0.0
+		mesh.position = mesh.position.lerp(mesh_base_position, 10.0 * delta)
+
 
 	move_and_slide()

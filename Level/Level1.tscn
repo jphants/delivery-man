@@ -158,6 +158,10 @@ _data = {
 
 [node name="Level1" type="Node3D"]
 
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.96409535, 0.18246035, -0.19294642, 0, 0.72657466, 0.6870875, 0.26555622, 0.6624178, -0.70048726, 0, 0, 0)
+shadow_enabled = true
+
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_ai77n")
 
