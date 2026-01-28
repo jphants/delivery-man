@@ -11,7 +11,11 @@ var mesh_base_position: Vector3
 var bob_time := 0.0
 
 #TEAM MESHES
-@onready var russian_mesh: MeshInstance3D = $MeshInstance3D/RussianMesh
+
+@onready var russian_skin: Node3D = $MeshInstance3D/RussianSkin
+@onready var italian_skin: Node3D = $MeshInstance3D/ItalianSkin
+@onready var japanese_skin: Node3D = $MeshInstance3D/JapaneseSkin
+@onready var old_skin: Node3D = $MeshInstance3D/OldSkin
 
 @onready var camera_pivot: Node3D = $CameraPivot
 @onready var camera_3d: Camera3D = $CameraPivot/Camera3D
@@ -38,6 +42,13 @@ signal health_changed(current: int)
 func die():
 	print("You are die")
 
+func _hide_all_skins() -> void:
+	old_skin.visible = false
+	russian_skin.visible = false
+	italian_skin.visible = false
+	japanese_skin.visible = false
+
+
 func take_damage(amount: int) -> void:
 	health -= amount
 	health = max(health, 0)
@@ -50,6 +61,18 @@ func take_damage(amount: int) -> void:
 
 func set_team(new_team: Team) -> void:
 	team = new_team
+	_hide_all_skins()
+
+	match team:
+		Team.TEAM1:
+			russian_skin.visible = true
+		Team.TEAM2:
+			italian_skin.visible = true
+		Team.TEAM3:
+			japanese_skin.visible = true
+		_:
+			pass
+
 
 func rotate_camera(degrees: float) -> void:
 	if rotation_tween and rotation_tween.is_running():
