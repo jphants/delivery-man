@@ -15,11 +15,27 @@ const SPEED := 5.0
 const JUMP_VELOCITY := 4.5
 const ROTATION_STEP := 90.0
 const ROTATION_TIME := 0.25 # segundos
+const MAX_HEALTH := 100
 
+var health := 100
 var target_rotation_y := 0.0
 var rotation_tween: Tween
 
 @export var team: Team = Team.TEAM2
+signal health_changed(current: int)
+
+func die():
+	print("You are die")
+
+func take_damage(amount: int) -> void:
+	health -= amount
+	health = max(health, 0)
+
+	print(health)
+	emit_signal("health_changed", health)
+
+	if health <= 0:
+		die()
 
 func set_team(new_team: Team) -> void:
 	team = new_team
