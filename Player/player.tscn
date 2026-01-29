@@ -1,4 +1,4 @@
-[gd_scene load_steps=59 format=4 uid="uid://b1cv0rb0cx1wb"]
+[gd_scene load_steps=60 format=4 uid="uid://b1cv0rb0cx1wb"]
 
 [ext_resource type="Script" uid="uid://b2skp16f3pgfr" path="res://Player/player.gd" id="1_l8h54"]
 [ext_resource type="Texture2D" uid="uid://d3ojt5rllnf8e" path="res://Models/Russian/russian_polar_jacket_Normal.png" id="2_4ntmi"]
@@ -1319,6 +1319,8 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_od3ui")
 
+[sub_resource type="SphereMesh" id="SphereMesh_btcbx"]
+
 [node name="Player" type="CharacterBody3D" groups=["player"]]
 collision_layer = 2
 script = ExtResource("1_l8h54")
@@ -1388,3 +1390,19 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.91834736, 0)
 
 [node name="StepSoundPlayer" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("3_btcbx")
+
+[node name="CPUParticles3D" type="CPUParticles3D" parent="."]
+transform = Transform3D(0.5626502, 0, 0, 0, 0.6516289, 0, 0, 0, 0.4281104, 0, 0.3445511, 0)
+emitting = false
+amount = 50
+lifetime = 0.7
+one_shot = true
+explosiveness = 1.0
+use_fixed_seed = true
+seed = 506627823
+mesh = SubResource("SphereMesh_btcbx")
+emission_shape = 3
+emission_box_extents = Vector3(1, 1, 1)
+gravity = Vector3(0, -9, 0)
+scale_amount_min = 0.5
+scale_amount_max = 0.5

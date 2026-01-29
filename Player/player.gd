@@ -21,6 +21,7 @@ var step_delay_timer := 0.
 @onready var italian_skin: Node3D = $MeshInstance3D/ItalianSkin
 @onready var japanese_skin: Node3D = $MeshInstance3D/JapaneseSkin
 @onready var old_skin: Node3D = $MeshInstance3D/OldSkin
+@onready var cpu_particles_3d: CPUParticles3D = $CPUParticles3D
 
 @onready var camera_pivot: Node3D = $CameraPivot
 @onready var camera_3d: Camera3D = $CameraPivot/Camera3D
@@ -66,6 +67,7 @@ func take_damage(amount: int) -> void:
 
 func set_team(new_team: Team) -> void:
 	team = new_team
+	cpu_particles_3d.emitting = true
 	_hide_all_skins()
 
 	match team:
