@@ -1,39 +1,52 @@
 extends Node3D
 
-@onready var sign: Node3D = $Sign
+# Path editable desde el editor para asignar la señal
+@export var sign_path: NodePath
+@onready var sign: Node3D = get_node_or_null(sign_path)  # obtiene el nodo seguro
+@onready var ringtone: AudioStreamPlayer3D = get_node_or_null("Ringtone")  # seguro si falta
 
 @export var mission_id: String = "first_steps"
 
 var player_inside := false
 var completed := false
 
-
 func _ready() -> void:
-	sign.visible = false
-
+	# Inicializar sign invisible
+	if sign:
+		sign.visible = false
+	else:
+		push_warning("Sign node no está asignado o el path es inválido!")
+		
+	# Comprobar que ringtone exista
+	if not ringtone:
+		push_warning("Ringtone node no está asignado o el path es inválido!")
 
 func _process(delta: float) -> void:
-	if player_inside \
-	and not completed \
-	and mission_id in GameManager.tasks \
+	# Interactuar para completar misión
+	if player_inside and not completed and mission_id in GameManager.tasks \
 	and Input.is_action_just_pressed("interact"):
 		complete_mission()
-
 
 func complete_mission() -> void:
 	GameManager.complete_task(mission_id)
 	completed = true
-	sign.visible = false
-	
-func _on_area_3d_body_entered(body: Node3D) -> void:
-	if body.is_in_group("player") \
-	and mission_id in GameManager.tasks \
-	and not completed:
-		player_inside = true
-		sign.visible = true
+	if sign:
+		sign.visible = false
+	if ringtone and ringtone.playing:
+		ringtone.stop()  # Detener al completar la misión
 
+func _on_area_3d_body_entered(body: Node3D) -> void:
+	if body.is_in_group("player") and mission_id in GameManager.tasks and not completed:
+		player_inside = true
+		if sign:
+			sign.visible = true
+		if ringtone and not ringtone.playing:
+			ringtone.play()  # Suena en loop si el AudioStream tiene Loop activado
 
 func _on_area_3d_body_exited(body: Node3D) -> void:
 	if body.is_in_group("player"):
 		player_inside = false
-		sign.visible = false
+		if sign:
+			sign.visible = false
+		if ringtone and ringtone.playing:
+			ringtone.stop()  # Detener al salir

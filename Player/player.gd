@@ -114,7 +114,6 @@ func _ready():
 
 
 func _physics_process(delta: float) -> void:
-	
 	label_3d.text = str(get_team())
 
 	# Gravedad
@@ -144,25 +143,28 @@ func _physics_process(delta: float) -> void:
 
 	# 🔥 ROTAR SOLO EL MESH HACIA DONDE SE MUEVE
 	var horizontal_vel := Vector3(velocity.x, 0, velocity.z)
-
 	var is_moving := horizontal_vel.length() > 0.05 and is_on_floor()
-	
 
 	if horizontal_vel.length() > 0.05:
 		var target_yaw := atan2(-horizontal_vel.x, -horizontal_vel.z)
-
 		mesh.rotation.y = lerp_angle(mesh.rotation.y, target_yaw, TURN_SPEED * delta)
 
+	# Bobbing del mesh
 	if is_moving:
 		bob_time += delta * 40.0 # velocidad del temblor
-
 		var y_offset := sin(bob_time) * 0.08
-		var x_offset := 0
-
-		mesh.position = mesh_base_position + Vector3(x_offset, y_offset, 0)
+		mesh.position = mesh_base_position + Vector3(0, y_offset, 0)
 	else:
 		bob_time = 0.0
 		mesh.position = mesh.position.lerp(mesh_base_position, 10.0 * delta)
 
+	# 🔊 Sonido de pasos
+	if is_moving:
+		step_delay_timer -= delta
+		if step_delay_timer <= 0.0:
+			step_sound_player.play()
+			step_delay_timer = step_delay
+	else:
+		step_delay_timer = 0.0 # Reinicia cuando no se mueve
 
 	move_and_slide()
