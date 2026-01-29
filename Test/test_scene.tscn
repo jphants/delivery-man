@@ -166,6 +166,19 @@ collision_mask = 3
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.070919, 2.230712, 2.1948743)
 shape = SubResource("SphereShape3D_vnkr1")
 
+[node name="Enemy2" parent="Enemy" node_paths=PackedStringArray("detection_area") instance=ExtResource("3_3e64s")]
+transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -7.7441306, 1.9963183, 8.327358)
+detection_area = NodePath("Area3D2")
+team = 2
+
+[node name="Area3D2" type="Area3D" parent="Enemy/Enemy2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.7441306, -1.9963183, -3.092288)
+collision_mask = 3
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Enemy/Enemy2/Area3D2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.070919, 2.230712, 2.1948743)
+shape = SubResource("SphereShape3D_vnkr1")
+
 [connection signal="body_entered" from="Cabinas/Cabin/Area3D" to="Cabinas/Cabin" method="_on_area_3d_body_entered"]
 [connection signal="body_entered" from="Cabinas/Cabin2/Area3D" to="Cabinas/Cabin2" method="_on_area_3d_body_entered"]
 [connection signal="body_entered" from="Cabinas/Cabin3/Area3D" to="Cabinas/Cabin3" method="_on_area_3d_body_entered"]

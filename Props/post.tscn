@@ -53,4 +53,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.50146484, 0)
 shape = SubResource("CylinderShape3D_4gews")
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.875959, 0.6616197)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.685262, 0.6616197)
+light_color = Color(1, 1, 0, 1)
+light_energy = 0.3
+shadow_enabled = true
