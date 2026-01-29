@@ -10,10 +10,10 @@
 [ext_resource type="PackedScene" uid="uid://dpy1q6nkwpvvl" path="res://Mission/endMission.tscn" id="7_vf83r"]
 [ext_resource type="MeshLibrary" uid="uid://c2n5a1e1ys3oe" path="res://Meshlib/bedrock.tres" id="10_di76u"]
 [ext_resource type="PackedScene" uid="uid://7pgn1ptgxt7k" path="res://Buildings/casino.tscn" id="12_q3rjx"]
-[ext_resource type="PackedScene" uid="uid://dbt7ushp0ei2a" path="res://Props/post.tscn" id="13_6ds1n"]
+[ext_resource type="PackedScene" path="res://Props/post.tscn" id="13_6ds1n"]
 [ext_resource type="PackedScene" uid="uid://bkdc35dj55obg" path="res://Buildings/edificio_2.tscn" id="13_ihfob"]
 [ext_resource type="PackedScene" uid="uid://b6vngyk7d6hbb" path="res://Buildings/edificio_3.tscn" id="14_grst6"]
-[ext_resource type="PackedScene" uid="uid://dbbdfm8ps25wa" path="res://Props/bench.tscn" id="14_ihfob"]
+[ext_resource type="PackedScene" path="res://Props/bench.tscn" id="14_ihfob"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_n58pf"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -249,7 +249,52 @@ transform = Transform3D(-1.1351357e-07, 0, -1.1121475, 0, 1, 0, 2.5968876, 0, -4
 [node name="Node3D" parent="Lights" instance=ExtResource("13_6ds1n")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.4341786, 0.9936873, -1.2474376)
 
+[node name="Node3D4" parent="Lights" instance=ExtResource("13_6ds1n")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 29.218977, 0, 4.314261)
+
+[node name="Node3D5" parent="Lights" instance=ExtResource("13_6ds1n")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 40.29276, 0, -5.001498)
+
+[node name="Node3D6" parent="Lights" instance=ExtResource("13_6ds1n")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.2643375, 0, -11.412516)
+
+[node name="Node3D7" parent="Lights" instance=ExtResource("13_6ds1n")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 11.055861, 0, -16.801048)
+
+[node name="Node3D8" parent="Lights" instance=ExtResource("13_6ds1n")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.241337, 0, -15.7914095)
+
+[node name="Node3D2" parent="Lights" instance=ExtResource("13_6ds1n")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 29.661161, 0, -8.632222)
+
+[node name="Node3D9" parent="Lights" instance=ExtResource("13_6ds1n")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 51.01533, 0, -10.816366)
+
+[node name="Node3D10" parent="Lights" instance=ExtResource("13_6ds1n")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 46.956623, 0, 6.7101316)
+
+[node name="Node3D11" parent="Lights" instance=ExtResource("13_6ds1n")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 64.76845, 0, 2.0814042)
+
+[node name="Node3D12" parent="Lights" instance=ExtResource("13_6ds1n")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 65.057274, 0, -9.194082)
+
 [node name="Props" type="Node3D" parent="."]
 
 [node name="Node3D" parent="Props" instance=ExtResource("14_ihfob")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.6040967, 1.1141579, -1.191366)
+
+[node name="Node3D2" parent="Props" instance=ExtResource("14_ihfob")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 29.007645, 1.0031683, -7.682666)
+
+[node name="Node3D3" parent="Props" instance=ExtResource("14_ihfob")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 30.126547, 0.9276414, -6.637164)
+
+[node name="Node3D4" parent="Props" instance=ExtResource("14_ihfob")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 27.751436, 0.89171696, -6.868235)
+
+[node name="Node3D5" parent="Props" instance=ExtResource("14_ihfob")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.709833, 1.3424425, -16.649004)
+
+[node name="Node3D6" parent="Props" instance=ExtResource("14_ihfob")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 49.980618, 1.0227501, -10.938806)
