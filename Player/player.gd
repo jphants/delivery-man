@@ -18,6 +18,9 @@ var last_sin := 0.0
 @export var step_delay := 0.2
 var step_delay_timer := 0.0
 
+@export var health_drain_per_second := 1
+var health_timer := 0.0
+
 # ======================
 # MOVIMIENTO (MOMENTUM)
 # ======================
@@ -107,6 +110,15 @@ func take_damage(amount: int) -> void:
 
 	if health <= 0:
 		die()
+
+func drain_health(amount: int) -> void:
+	health -= amount
+	health = max(health, 0)
+	emit_signal("health_changed", health)
+
+	if health <= 0:
+		die()
+
 
 func die():
 	print("You are die")
@@ -222,5 +234,12 @@ func _physics_process(delta: float) -> void:
 			step_delay_timer = step_delay
 	else:
 		step_delay_timer = 0.0
+	
+	# ---- Drenaje de vida ----
+	health_timer += delta
+	if health_timer >= 1.0:
+		drain_health(health_drain_per_second)
+		health_timer = 0.0
 
+	
 	move_and_slide()

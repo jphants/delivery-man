@@ -95,6 +95,7 @@ mesh = SubResource("ArrayMesh_0j8al")
 skeleton = NodePath("")
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
+omni_range = 0.78541
 
 [node name="Area3D" type="Area3D" parent="."]
 collision_layer = 3

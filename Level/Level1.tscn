@@ -82,6 +82,7 @@ team = 0
 
 [node name="Enemy1" parent="Enemies" node_paths=PackedStringArray("detection_area") instance=ExtResource("3_6ds1n")]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 0, 3.239256, -4.5228686)
+shoot_cooldown = 1.0
 detection_area = NodePath("Area3D2")
 
 [node name="Area3D2" type="Area3D" parent="Enemies/Enemy1"]

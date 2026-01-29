@@ -20,7 +20,8 @@ var team_colors := {
 	Team.TEAM3: Color(1, 0, 0)  # rojo
 }
 
-var player_inside := false
+# 🎯 Target actual (player)
+var target: Node3D = null
 
 func _ready() -> void:
 	_update_light_color()
@@ -32,17 +33,25 @@ func _update_light_color() -> void:
 		omni_light_3d.light_color = team_colors[team]
 
 func _process(delta: float) -> void:
-	if player_inside and Input.is_action_just_pressed("interact"):
-		placeholder_interact()
+	if target and Input.is_action_just_pressed("interact"):
+		interact_with_target()
 
 func _on_body_entered(body: Node3D) -> void:
 	if body.is_in_group("player"):
-		player_inside = true
+		target = body
+		# opcional debug
+		# print("Player detectado:", body.name)
 
 func _on_body_exited(body: Node3D) -> void:
-	if body.is_in_group("player"):
-		player_inside = false
+	if body == target:
+		target = null
+		# opcional debug
+		# print("Player salió del área")
 
-func placeholder_interact() -> void:
-	self.visible = false
-	print("Interact placeholder ejecutado 🚧")
+func interact_with_target() -> void:
+	if target.has_method("take_damage"):
+		target.take_damage(-10)
+		print("💥 Daño aplicado al player (-10)")
+	else:
+		print("⚠️ El target no tiene take_damage()")
+	queue_free()
