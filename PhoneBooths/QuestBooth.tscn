@@ -1,7 +1,8 @@
-[gd_scene load_steps=19 format=4 uid="uid://oyi202a8oiv5"]
+[gd_scene load_steps=20 format=4 uid="uid://oyi202a8oiv5"]
 
 [ext_resource type="Script" uid="uid://brh2m7ckthpg2" path="res://Test/start_timer.gd" id="1_5jdvi"]
 [ext_resource type="Texture2D" uid="uid://du3aolvd1lm5" path="res://Models/Green sign/exclamation_sign_0.png" id="2_5jdvi"]
+[ext_resource type="Resource" uid="uid://xcp5rjbnumlo" path="res://Dialogues/startMission.dialogue" id="2_n8vei"]
 [ext_resource type="AudioStream" uid="uid://dmud0d35ehih1" path="res://SFX/phoneRing.mp3" id="3_uhn0n"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vviwj"]
@@ -244,6 +245,7 @@ shadow_mesh = SubResource("ArrayMesh_xp07t")
 [node name="QuestBooth" type="StaticBody3D"]
 script = ExtResource("1_5jdvi")
 sign_path = NodePath("Node3D")
+start_mission_dialogue = ExtResource("2_n8vei")
 
 [node name="phone_booth" type="MeshInstance3D" parent="."]
 cast_shadow = 0

@@ -4,6 +4,7 @@ extends Node3D
 @export var sign_path: NodePath
 @onready var sign: Node3D = get_node_or_null(sign_path)  # seguro si el path es incorrecto
 @onready var ringtone: AudioStreamPlayer3D = $Ringtone  # asigna en editor
+@export var start_mission_dialogue: DialogueResource  # Asignar en el editor
 
 @export var mission_id: String = "first_steps"
 
@@ -29,6 +30,7 @@ func _process(delta: float) -> void:
 		# Detener el ringtone al tomar la misión
 		if ringtone and ringtone.playing:
 			ringtone.stop()
+		DialogueManager.show_dialogue_balloon(start_mission_dialogue)
 
 func _on_area_3d_body_entered(body: Node3D) -> void:
 	if body.is_in_group("player") and not mission_taken:

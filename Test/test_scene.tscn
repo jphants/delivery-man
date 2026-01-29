@@ -1,8 +1,9 @@
-[gd_scene load_steps=11 format=3 uid="uid://xnq3t2rwfmhm"]
+[gd_scene load_steps=12 format=3 uid="uid://xnq3t2rwfmhm"]
 
 [ext_resource type="Script" uid="uid://b6xdpje3e4vh4" path="res://Test/test_scene.gd" id="1_u5yuk"]
 [ext_resource type="PackedScene" uid="uid://b1cv0rb0cx1wb" path="res://Player/player.tscn" id="2_3ofr5"]
 [ext_resource type="PackedScene" uid="uid://6qjurfsexb5y" path="res://MafiaEnemy/mafiaEnemy.tscn" id="3_3e64s"]
+[ext_resource type="PackedScene" uid="uid://oyi202a8oiv5" path="res://PhoneBooths/QuestBooth.tscn" id="5_0s61m"]
 [ext_resource type="Script" uid="uid://duk6qs2smbrtm" path="res://Test/canvas_layer.gd" id="8_sbq1r"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_u5yuk"]
@@ -111,3 +112,6 @@ collision_mask = 3
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Enemy/Enemy2/Area3D2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.070919, 2.230712, 2.1948743)
 shape = SubResource("SphereShape3D_vnkr1")
+
+[node name="QuestBooth" parent="." instance=ExtResource("5_0s61m")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.3460574, 0.42260408, 0)
