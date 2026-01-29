@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://b6xdpje3e4vh4" path="res://Test/test_scene.gd" id="1_u5yuk"]
 [ext_resource type="PackedScene" uid="uid://b1cv0rb0cx1wb" path="res://Player/player.tscn" id="2_3ofr5"]
 [ext_resource type="PackedScene" uid="uid://6qjurfsexb5y" path="res://MafiaEnemy/mafiaEnemy.tscn" id="3_3e64s"]
-[ext_resource type="PackedScene" uid="uid://oyi202a8oiv5" path="res://PhoneBooths/QuestBooth.tscn" id="5_0s61m"]
+[ext_resource type="PackedScene" path="res://PhoneBooths/QuestBooth.tscn" id="5_0s61m"]
 [ext_resource type="Script" uid="uid://duk6qs2smbrtm" path="res://Test/canvas_layer.gd" id="8_sbq1r"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_u5yuk"]

@@ -1,8 +1,9 @@
-[gd_scene load_steps=24 format=3 uid="uid://cenl60q65u7y4"]
+[gd_scene load_steps=26 format=3 uid="uid://cenl60q65u7y4"]
 
 [ext_resource type="Script" uid="uid://b1hewj5ikpxxv" path="res://Level/level_1.gd" id="1_di76u"]
 [ext_resource type="PackedScene" uid="uid://b1cv0rb0cx1wb" path="res://Player/player.tscn" id="1_n58pf"]
 [ext_resource type="PackedScene" uid="uid://c0qt65k2g2x7l" path="res://Buildings/edificio_1.tscn" id="2_d5det"]
+[ext_resource type="Texture2D" uid="uid://bc3pti2oe15j5" path="res://HDRI/moonless_golf_2k.hdr" id="2_grst6"]
 [ext_resource type="PackedScene" uid="uid://6qjurfsexb5y" path="res://MafiaEnemy/mafiaEnemy.tscn" id="3_6ds1n"]
 [ext_resource type="Script" uid="uid://duk6qs2smbrtm" path="res://Test/canvas_layer.gd" id="4_7lyb7"]
 [ext_resource type="Shader" uid="uid://c3f2vv4jkfu6n" path="res://Shaders/Level1.gdshader" id="6_vf83r"]
@@ -14,16 +15,17 @@
 [ext_resource type="PackedScene" uid="uid://b6vngyk7d6hbb" path="res://Buildings/edificio_3.tscn" id="14_grst6"]
 [ext_resource type="PackedScene" path="res://Props/bench.tscn" id="14_ihfob"]
 [ext_resource type="PackedScene" path="res://PhoneBooths/QuestBooth.tscn" id="14_ilpef"]
-[ext_resource type="Resource" uid="uid://xcp5rjbnumlo" path="res://Dialogues/startMission.dialogue" id="15_grst6"]
+[ext_resource type="PackedScene" path="res://PhoneBooths/EndQuestBooth.tscn" id="16_ilpef"]
+[ext_resource type="PackedScene" uid="uid://dxavh71evw1m2" path="res://Collectible/collectible.tscn" id="17_2f46p"]
 
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_n58pf"]
-sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
-ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_ilpef"]
+panorama = ExtResource("2_grst6")
 
 [sub_resource type="Sky" id="Sky_1rv4e"]
-sky_material = SubResource("ProceduralSkyMaterial_n58pf")
+sky_material = SubResource("PanoramaSkyMaterial_ilpef")
 
 [sub_resource type="Environment" id="Environment_ai77n"]
+background_mode = 2
 sky = SubResource("Sky_1rv4e")
 ambient_light_source = 2
 tonemap_mode = 2
@@ -64,9 +66,9 @@ script = ExtResource("1_di76u")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.699448, 0)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 4.7105427, 3.9980867, 0)
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 4.7105427, 17.152899, 0)
 light_color = Color(0.42060807, 0.6938583, 0.8354343, 1)
-light_energy = 0.02
+light_energy = 0.05
 shadow_enabled = true
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
@@ -329,5 +331,21 @@ transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 52.8
 target_team = 3
 
 [node name="QuestBooth" parent="Cabinas" instance=ExtResource("14_ilpef")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0141742, -15.789891)
-start_mission_dialogue = ExtResource("15_grst6")
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -5.1465163, 1.0141742, -11.050713)
+
+[node name="EndQuestBooth" parent="Cabinas" instance=ExtResource("16_ilpef")]
+transform = Transform3D(-1, 0, 8.940697e-08, 0, 1, 0, -8.940697e-08, 0, -1, -5.182941, 0.9625857, -12.613671)
+
+[node name="Deliver" type="Node3D" parent="."]
+
+[node name="Collectible" parent="Deliver" instance=ExtResource("17_2f46p")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.6103663, 1.4553409, -0.11899161)
+team = 1
+
+[node name="Collectible2" parent="Deliver" instance=ExtResource("17_2f46p")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.6103663, 1.4553409, 3.8221211)
+team = 2
+
+[node name="Collectible3" parent="Deliver" instance=ExtResource("17_2f46p")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.6103663, 1.4553409, 8.458372)
+team = 3

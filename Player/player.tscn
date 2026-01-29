@@ -1381,7 +1381,7 @@ skeleton = NodePath("")
 [node name="CameraPivot" type="Node3D" parent="."]
 
 [node name="Camera3D" type="Camera3D" parent="CameraPivot"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.7512352, 3.1981208)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.3834665, 2.2446272)
 
 [node name="Label3D" type="Label3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.91834736, 0)

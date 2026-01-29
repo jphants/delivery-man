@@ -4,6 +4,7 @@ extends Node3D
 @export var sign_path: NodePath
 @onready var sign: Node3D = get_node_or_null(sign_path)  # obtiene el nodo seguro
 @onready var ringtone: AudioStreamPlayer3D = get_node_or_null("Ringtone")  # seguro si falta
+const OUTRO = preload("uid://d38ufhm50tk8j")
 
 @export var mission_id: String = "first_steps"
 
@@ -34,6 +35,9 @@ func complete_mission() -> void:
 		sign.visible = false
 	if ringtone and ringtone.playing:
 		ringtone.stop()  # Detener al completar la misión
+	TransitionScreen.transition()
+	await TransitionScreen.on_transition_finished
+	get_tree().change_scene_to_file("res://Intro/outro.tscn")
 
 func _on_area_3d_body_entered(body: Node3D) -> void:
 	if body.is_in_group("player") and mission_id in GameManager.tasks and not completed:

@@ -33,7 +33,8 @@ const MESH_Y_OFFSET := +PI / 2
 const TURN_SPEED := 10.0
 
 const SPEED := 5.0
-const JUMP_VELOCITY := 4.5
+const JUMP_VELOCITY := 2.5
+const DIVE_VELOCITY := 3.5
 const ROTATION_STEP := 90.0
 const ROTATION_TIME := 0.25 # segundos
 const MAX_HEALTH := 100
@@ -124,7 +125,9 @@ func _physics_process(delta: float) -> void:
 	# Gravedad
 	if not is_on_floor():
 		velocity += get_gravity() * delta
-
+	
+	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
+		velocity.y += JUMP_VELOCITY
 	# Input de cámara
 	if Input.is_action_just_pressed("camera_left"):
 		rotate_camera(-ROTATION_STEP)
