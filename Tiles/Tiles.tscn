@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://ck24ufxocw3cl"]
+[gd_scene load_steps=10 format=3 uid="uid://ck24ufxocw3cl"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0b27y"]
 albedo_color = Color(0.59544253, 0.6497656, 0.30226424, 1)
@@ -19,6 +19,12 @@ albedo_color = Color(0.9278557, 0.551155, 0.4560002, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_bbq2c"]
 material = SubResource("StandardMaterial3D_djc5e")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5u4tj"]
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_ctcbd"]
+material = SubResource("StandardMaterial3D_5u4tj")
 
 [node name="ML1" type="Node3D"]
 
@@ -50,4 +56,14 @@ collision_layer = 2
 collision_mask = 2
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Edificio/GroundTest"]
+shape = SubResource("BoxShape3D_5u4tj")
+
+[node name="Void" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_ctcbd")
+
+[node name="GroundTest" type="StaticBody3D" parent="Void"]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Void/GroundTest"]
 shape = SubResource("BoxShape3D_5u4tj")
