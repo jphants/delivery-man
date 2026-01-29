@@ -3,6 +3,7 @@ extends CharacterBody3D
 @onready var exclamation_sign: Node3D = $blockbench_export
 @onready var raycast: RayCast3D = $RayCast3D
 @onready var mesh_instance_3d: MeshInstance3D = $MeshInstance3D
+@onready var aim_line: CSGCylinder3D = $Aiming
 
 const bullet_scene = preload("uid://dsuxhbxij7r3s")
 
@@ -45,6 +46,39 @@ var previous_target: Node3D = null  # Para saber si cambió el target
 # ======================
 func get_team() -> Team:
 	return team
+
+func update_aim_line(show: bool) -> void:
+	if not aim_line:
+		return
+
+	if show and target:
+		var start := raycast.global_position
+		var end := target.global_position + Vector3.UP * eye_height
+
+		var dir := end - start
+		var length := dir.length()
+		if length < 0.01:
+			return
+
+		aim_line.visible = true
+		aim_line.height = length
+
+		# Punto medio
+		var mid := start + dir * 0.5
+
+		# Construir basis donde Y apunta al target
+		var up := dir.normalized()
+		var right := up.cross(Vector3.FORWARD)
+		if right.length() < 0.01:
+			right = up.cross(Vector3.RIGHT)
+		right = right.normalized()
+		var forward := right.cross(up).normalized()
+
+		var basis := Basis(right, up, forward)
+
+		aim_line.global_transform = Transform3D(basis, mid)
+	else:
+		aim_line.visible = false
 
 
 func _hide_all_skins() -> void:
@@ -109,7 +143,12 @@ func _physics_process(delta: float) -> void:
 	# Detección y disparo
 	# ======================
 	var sees_target := can_see_target()
+	var can_aim := sees_target and target != null
+
+
 	exclamation_sign.visible = sees_target
+	update_aim_line(can_aim)
+
 
 	# Sonar spotted_sound solo al adquirir target nuevo
 	if sees_target:

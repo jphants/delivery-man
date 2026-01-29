@@ -1,59 +1,45 @@
 shader_type canvas_item;
 
-// Uniform requerido para acceder a la pantalla
 uniform sampler2D SCREEN_TEXTURE : hint_screen_texture;
 
-uniform float saturation : hint_range(0.0, 2.0) = 1.6;
-uniform float contrast : hint_range(0.0, 2.0) = 1.3;
-uniform float gamma : hint_range(0.1, 3.0) = 1.0;
-uniform float brightness : hint_range(0.0, 1.0) = 0.0;
-uniform float outline_strength : hint_range(0.0, 1.0) = 0.5;
-uniform float light_threshold : hint_range(0.0, 1.0) = 0.5; // Para delimitar luces
+// Intensidad general del sepia
+uniform float sepia_amount : hint_range(0.0, 1.0) = 0.7;
 
-vec3 rgb2gray(vec3 color){
-    return vec3(dot(color, vec3(0.299,0.587,0.114)));
-}
+// A partir de qué luminancia se conserva el color
+uniform float highlight_preserve : hint_range(0.0, 1.0) = 0.6;
 
-// Función de toon shading
-vec3 toon_shade(vec3 color, float threshold){
-    // Convertimos a gris para determinar luz
-    float lum = dot(color, vec3(0.299,0.587,0.114));
-    if(lum > threshold){
-        return vec3(1.0); // Luz brillante
-    } else {
-        return vec3(0.0); // Sombra
-    }
-}
+// Qué tan fuerte se mantiene el color en luces
+uniform float highlight_strength : hint_range(0.0, 1.0) = 0.8;
+
+// Contraste y brillo finos
+uniform float contrast : hint_range(0.5, 2.0) = 1.1;
+uniform float brightness : hint_range(-0.3, 0.3) = 0.05;
 
 void fragment() {
-    vec2 uv = SCREEN_UV;
+	vec2 uv = SCREEN_UV;
+	vec4 col = texture(SCREEN_TEXTURE, uv);
 
-    // Obtener color del fondo
-    vec4 col = texture(SCREEN_TEXTURE, uv);
+	// Luminancia perceptual
+	float lum = dot(col.rgb, vec3(0.299, 0.587, 0.114));
 
-    // Saturación
-    vec3 grey = rgb2gray(col.rgb);
-    col.rgb = mix(grey, col.rgb, saturation);
+	// Sepia clásico
+	vec3 sepia;
+	sepia.r = dot(col.rgb, vec3(0.393, 0.769, 0.189));
+	sepia.g = dot(col.rgb, vec3(0.349, 0.686, 0.168));
+	sepia.b = dot(col.rgb, vec3(0.272, 0.534, 0.131));
 
-    // Contraste
-    col.rgb = ((col.rgb - 0.5) * contrast + 0.5);
+	// Más sepia en sombras, menos en luces
+	float sepia_mix = sepia_amount * (1.0 - smoothstep(highlight_preserve, 1.0, lum));
 
-    // Gamma y brillo
-    col.rgb = pow(col.rgb, vec3(1.0 / gamma));
-    col.rgb += brightness;
+	// Mezclar original ↔ sepia
+	vec3 color_mixed = mix(col.rgb, sepia, sepia_mix);
 
-    // --- Outline más marcado usando Sobel simplificado ---
-    vec2 offset = vec2(1.0 / 512.0, 1.0 / 512.0);
-    float edge = 0.0;
-    edge += length(texture(SCREEN_TEXTURE, uv + vec2(-offset.x, 0)).rgb - col.rgb);
-    edge += length(texture(SCREEN_TEXTURE, uv + vec2(offset.x, 0)).rgb - col.rgb);
-    edge += length(texture(SCREEN_TEXTURE, uv + vec2(0, -offset.y)).rgb - col.rgb);
-    edge += length(texture(SCREEN_TEXTURE, uv + vec2(0, offset.y)).rgb - col.rgb);
-    edge = clamp(edge * 10.0, 0.0, 1.0); // Multiplicador mayor para bordes más visibles
+	// Recuperar color en highlights
+	color_mixed = mix(color_mixed, col.rgb, smoothstep(highlight_preserve, 1.0, lum) * highlight_strength);
 
-    // Aplicar toon shading a luces
-    col.rgb = mix(toon_shade(col.rgb, light_threshold), col.rgb, 1.0 - edge * outline_strength);
+	// Contraste y brillo finales
+	color_mixed = ((color_mixed - 0.5) * contrast) + 0.5;
+	color_mixed += brightness;
 
-    // Mantener transparencia
-    COLOR = vec4(col.rgb, col.a);
+	COLOR = vec4(color_mixed, col.a);
 }

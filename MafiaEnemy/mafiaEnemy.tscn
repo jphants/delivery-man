@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=4 uid="uid://6qjurfsexb5y"]
+[gd_scene load_steps=42 format=4 uid="uid://6qjurfsexb5y"]
 
 [ext_resource type="Script" uid="uid://2jol6ey2w8wf" path="res://MafiaEnemy/enemy_1.gd" id="1_ap1rn"]
 [ext_resource type="Texture2D" uid="uid://djcvryhkys4ic" path="res://Models/Exclamation sign/exclamation_sign_0.png" id="2_7mhc1"]
@@ -765,11 +765,15 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_ttgas")
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1vyay"]
+albedo_color = Color(0.7469554, 0.12697488, 0.20526966, 1)
+
 [node name="Enemy1" type="CharacterBody3D"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 0, 0, 0)
 collision_layer = 4
 script = ExtResource("1_ap1rn")
-max_spread_deg = 15.0
+accuracy = 1.0
+max_spread_deg = 0.0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("BoxShape3D_2w30r")
@@ -841,6 +845,11 @@ volume_db = -5.0
 [node name="ShootSound" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("6_8ksb0")
 volume_db = -15.0
+
+[node name="Aiming" type="CSGCylinder3D" parent="."]
+transform = Transform3D(0.99999267, 0, 0, 0, 1, -2.9802322e-08, 0, -7.4505806e-08, 0.99999267, 0, 0, 0)
+radius = 0.05
+material = SubResource("StandardMaterial3D_1vyay")
 
 [connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
 [connection signal="body_exited" from="Area3D" to="." method="_on_area_3d_body_exited"]

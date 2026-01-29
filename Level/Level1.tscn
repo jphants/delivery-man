@@ -33,17 +33,16 @@ glow_enabled = true
 glow_bloom = 0.5
 glow_hdr_threshold = 0.6
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_6ds1n"]
-radius = 2.5302193
+[sub_resource type="BoxShape3D" id="BoxShape3D_2f46p"]
+size = Vector3(10.562256, 1, 20.624207)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_sxufl"]
 shader = ExtResource("6_vf83r")
-shader_parameter/saturation = 2.0
-shader_parameter/contrast = 1.2
-shader_parameter/gamma = 1.0
-shader_parameter/brightness = 0.0
-shader_parameter/outline_strength = 0.2
-shader_parameter/light_threshold = 0.5
+shader_parameter/sepia_amount = 0.6000000285
+shader_parameter/highlight_preserve = 0.550000026125
+shader_parameter/highlight_strength = 1.0
+shader_parameter/contrast = 1.1000000285
+shader_parameter/brightness = 0.060000005179070004
 
 [sub_resource type="Animation" id="Animation_ics5d"]
 resource_name = "Enemy1_movement"
@@ -81,7 +80,7 @@ team = 0
 [node name="Enemies" type="Node3D" parent="."]
 
 [node name="Enemy1" parent="Enemies" node_paths=PackedStringArray("detection_area") instance=ExtResource("3_6ds1n")]
-transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 0, 3.239256, -4.5228686)
+transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 8.088356, 1.766727, 9.137299)
 shoot_cooldown = 1.0
 detection_area = NodePath("Area3D2")
 
@@ -90,7 +89,8 @@ collision_layer = 7
 collision_mask = 7
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Enemies/Enemy1/Area3D2"]
-shape = SubResource("SphereShape3D_6ds1n")
+transform = Transform3D(0.9999822, 0, 0, 0, 1, 0, 0, 0, 0.9999822, 0.044555664, 0, -9.812068)
+shape = SubResource("BoxShape3D_2f46p")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 script = ExtResource("4_7lyb7")
