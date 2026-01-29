@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 GameManager="*res://Autoloads/gameManager.gd"
 DialogueManager="*res://addons/dialogue_manager/dialogue_manager.gd"
+TransitionScreen="*res://TransitionScreen/transitionScreen.tscn"
 
 [editor_plugins]
 
