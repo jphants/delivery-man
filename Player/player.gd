@@ -67,7 +67,7 @@ signal reset_game
 @onready var dust_particles: CPUParticles3D = $MeshInstance3D/DustParticles
 
 @onready var camera_pivot: Node3D = $CameraPivot
-@onready var camera_3d: Camera3D = $CameraPivot/Camera3D
+@onready var camera_3d: Camera3D = $CameraPivot/SpringArm3D/Camera3D
 @onready var label_3d: Label3D = $Label3D
 @onready var mesh: MeshInstance3D = $MeshInstance3D
 
@@ -149,7 +149,8 @@ func rotate_camera(degrees: float) -> void:
 	)
 
 	rotation_tween.finished.connect(func():
-		camera_3d.look_at(global_position, Vector3.UP)
+		pass
+		#camera_3d.look_at(global_position, Vector3.UP)
 	)
 
 # ======================
@@ -158,7 +159,7 @@ func rotate_camera(degrees: float) -> void:
 
 func _ready():
 	target_rotation_y = camera_pivot.rotation.y
-	camera_3d.look_at(global_position, Vector3.UP)
+	#camera_pivot.look_at(global_position, Vector3.UP)
 	mesh_base_position = mesh.position
 
 # ======================

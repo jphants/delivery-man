@@ -146,7 +146,7 @@ metadata/_editor_floor_ = Vector3(0, 1, 0)
 [node name="Edificios" type="Node3D" parent="."]
 
 [node name="Edificio8" parent="Edificios" instance=ExtResource("2_d5det")]
-transform = Transform3D(-8.3381536e-08, 0, 1.0311137, 0, 1, 0, -1.907547, 0, -4.5071413e-08, 19.718601, -4.7683716e-07, -17.887564)
+transform = Transform3D(-8.3381536e-08, 0, 1.0311137, 0, 1, 0, -1.907547, 0, -4.5071413e-08, 19.718601, 0.99614084, -17.887564)
 
 [node name="Casino" parent="Edificios" instance=ExtResource("12_q3rjx")]
 transform = Transform3D(-1.1908517, 0, -1.2906601e-07, 0, 1.5, 0, 1.0410754e-07, 0, -1.476343, -6.723388, 0.4755888, -4.0521975)
@@ -158,25 +158,25 @@ transform = Transform3D(1.7673899, 0, 0, 0, 1.1777322, 0, 0, 0, 1, 3.4340363, 0.
 transform = Transform3D(-1.15055514e-07, 0, -1, 0, 1, 0, 2.6321635, 0, -4.371139e-08, 4.325885, 1.0025477, 7.606714)
 
 [node name="edificio_3" parent="Edificios" instance=ExtResource("14_grst6")]
-transform = Transform3D(-0.006947567, 0, 1.7705132, 0, 1, 0, -0.99515235, 0, -0.012360679, 4.639882, 0.97107935, -12.185232)
+transform = Transform3D(-0.006947567, 0, 1.7705132, 0, 1, 0, -0.99515235, 0, -0.012360679, 4.639882, 0.9308362, -12.185232)
 
 [node name="Edificio3" parent="Edificios" instance=ExtResource("13_ihfob")]
-transform = Transform3D(0.036767498, 0, 0.70122486, 0, 1, 0, -1.3162994, 0, 0.019586943, 2.6355581, 0, -18.599316)
+transform = Transform3D(0.036767498, 0, 0.70122486, 0, 1, 0, -1.3162994, 0, 0.019586943, 2.6355581, 0.835181, -18.599316)
 
 [node name="Edificio4" parent="Edificios" instance=ExtResource("13_ihfob")]
 transform = Transform3D(-1.18275224e-07, 0, -0.99999994, 0, 1, 0, 2.7058215, 0, -4.3711385e-08, 12.024424, 0.7488184, 7.8567543)
 
 [node name="edificio_4" parent="Edificios" instance=ExtResource("14_grst6")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1.7971938, 13.0529, 0, -13.803184)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1.7971938, 13.0529, 0.94438946, -13.803184)
 
 [node name="Edificio5" parent="Edificios" instance=ExtResource("2_d5det")]
 transform = Transform3D(0.032562368, 0, 0.9949693, 0, 1, 0, -1.1657532, 0, 0.02779195, 10.207831, 0.9991846, -18.546646)
 
 [node name="Edificio6" parent="Edificios" instance=ExtResource("13_ihfob")]
-transform = Transform3D(-1.0148536, 0, -0.03701597, 0, 1, 0, 0.05673901, 0, -0.6620805, 12.86646, -4.7683716e-07, -18.592775)
+transform = Transform3D(-1.0148536, 0, -0.03701597, 0, 1, 0, 0.05673901, 0, -0.6620805, 12.86646, 0.94191, -18.592775)
 
 [node name="edificio_5" parent="Edificios" instance=ExtResource("14_grst6")]
-transform = Transform3D(-0.014691934, 0, 1.2604582, 0, 1, 0, -2.1044362, 0, -0.008799776, 11.375775, 0, -3.6656723)
+transform = Transform3D(-0.014691934, 0, 1.2604582, 0, 1, 0, -2.1044362, 0, -0.008799776, 11.375775, 0.9653642, -3.6656723)
 
 [node name="Edificio7" parent="Edificios" instance=ExtResource("13_ihfob")]
 transform = Transform3D(0.08332525, 0, -1.1871442, 0, 1, 0, 2.9830961, 0, 0.03315987, 20.511044, 1.0373392, 7.422226)
@@ -236,7 +236,7 @@ transform = Transform3D(-1.0031049e-07, 0, 1.7301913, 0, 1.3469584, 0, -2.294836
 transform = Transform3D(-6.6074634e-08, 0, 1, 0, 1, 0, -1.5116115, 0, -4.371139e-08, 58.02381, 1.0305631, -17.454731)
 
 [node name="Edificio21" parent="Edificios" instance=ExtResource("2_d5det")]
-transform = Transform3D(-1.0053244e-07, 0, 1, 0, 1, 0, -2.2999141, 0, -4.371139e-08, 49.041348, 0, -17.238693)
+transform = Transform3D(-1.0053244e-07, 0, 1, 0, 1, 0, -2.2999141, 0, -4.371139e-08, 49.041348, 0.9850118, -17.238693)
 
 [node name="Edificio22" parent="Edificios" instance=ExtResource("13_ihfob")]
 transform = Transform3D(-4.371139e-08, 0, 1.1233053, 0, 1, 0, -1, 0, -4.9101235e-08, 53.37841, 0.98852444, 2.1676102)
@@ -312,7 +312,7 @@ transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 30.1
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 27.751436, 0.89171696, -6.868235)
 
 [node name="Node3D5" parent="Props" instance=ExtResource("14_ihfob")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.709833, 1.3424425, -16.649004)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.709833, 0.99528205, -16.649004)
 
 [node name="Node3D6" parent="Props" instance=ExtResource("14_ihfob")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 49.980618, 1.0227501, -10.938806)
