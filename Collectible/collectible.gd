@@ -10,6 +10,7 @@ enum Team {
 @onready var area_3d: Area3D = $Area3D
 @onready var omni_light_3d: OmniLight3D = $OmniLight3D
 @onready var blockbench_export: Node3D = $blockbench_export
+@onready var audio_stream_player_3d: AudioStreamPlayer3D = $AudioStreamPlayer3D
 
 @export var team: Team
 
@@ -54,4 +55,6 @@ func interact_with_target() -> void:
 		print("💥 Daño aplicado al player (-10)")
 	else:
 		print("⚠️ El target no tiene take_damage()")
+	audio_stream_player_3d.play()
+	await audio_stream_player_3d.finished
 	queue_free()
