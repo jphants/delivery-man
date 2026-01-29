@@ -6,6 +6,7 @@
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_4ntmi"]
 height = 1.5493164
+radius = 0.33642578
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vhpjr"]
 resource_name = "sneakers_R"
