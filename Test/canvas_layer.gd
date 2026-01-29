@@ -17,7 +17,7 @@ func _ready() -> void:
 		_on_health_changed(player.health) # valor inicial
 
 func _on_health_changed(current_health: int) -> void:
-	health_label.text = "❤️ Vida: %d" % current_health
+	health_label.text = "⌛ Tiempo restante: %d" % current_health
 
 
 func _on_task_added(task_id: String) -> void:

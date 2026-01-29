@@ -7,67 +7,76 @@ enum Team {
 	TEAM3
 }
 
+# ======================
+# VARIABLES GENERALES
+# ======================
+
 var mesh_base_position: Vector3
 var bob_time := 0.0
+var last_sin := 0.0
 
-@export var step_delay := 0.2 # segundos antes de sonar
-var step_delay_timer := 0.
+@export var step_delay := 0.2
+var step_delay_timer := 0.0
+
+# ======================
+# MOVIMIENTO (MOMENTUM)
+# ======================
+
+const SPEED := 5.0
+const ACCELERATION := 18.0
+const FRICTION := 10.0
+const JUMP_VELOCITY := 1.5
+
+# ======================
+# ROTACIÓN / CÁMARA
+# ======================
+
+const TURN_SPEED := 10.0
+const ROTATION_STEP := 90.0
+const ROTATION_TIME := 0.25
+
+var target_rotation_y := 0.0
+var rotation_tween: Tween
+
+# ======================
+# VIDA / TEAM
+# ======================
+
+const MAX_HEALTH := 100
+var health := 100
+
+@export var team: Team = Team.TEAM2
+signal health_changed(current: int)
+signal reset_game
+
+# ======================
+# NODOS
+# ======================
 
 @onready var step_sound_player: AudioStreamPlayer3D = $StepSoundPlayer
-
-#TEAM MESHES
 
 @onready var russian_skin: Node3D = $MeshInstance3D/RussianSkin
 @onready var italian_skin: Node3D = $MeshInstance3D/ItalianSkin
 @onready var japanese_skin: Node3D = $MeshInstance3D/JapaneseSkin
 @onready var old_skin: Node3D = $MeshInstance3D/OldSkin
+
 @onready var cpu_particles_3d: CPUParticles3D = $CPUParticles3D
+@onready var dust_particles: CPUParticles3D = $MeshInstance3D/DustParticles
 
 @onready var camera_pivot: Node3D = $CameraPivot
 @onready var camera_3d: Camera3D = $CameraPivot/Camera3D
 @onready var label_3d: Label3D = $Label3D
 @onready var mesh: MeshInstance3D = $MeshInstance3D
 
-const MESH_Y_OFFSET := +PI / 2
-
-const TURN_SPEED := 10.0
-
-const SPEED := 5.0
-const JUMP_VELOCITY := 2.5
-const DIVE_VELOCITY := 3.5
-const ROTATION_STEP := 90.0
-const ROTATION_TIME := 0.25 # segundos
-const MAX_HEALTH := 100
-
-var health := 100
-var target_rotation_y := 0.0
-var rotation_tween: Tween
-
-@export var team: Team = Team.TEAM2
-signal health_changed(current: int)
-
-signal reset_game  # Signal que se emitirá al morir
-
-func die():
-	print("You are die")
-	emit_signal("reset_game")  # Emitimos el signal
+# ======================
+# FUNCIONES DE TEAM
+# ======================
 
 func _hide_all_skins() -> void:
 	old_skin.visible = false
 	russian_skin.visible = false
 	italian_skin.visible = false
 	japanese_skin.visible = false
-
-
-func take_damage(amount: int) -> void:
-	health -= amount
-	health = max(health, 0)
-
-	print(health)
-	emit_signal("health_changed", health)
-
-	if health <= 0:
-		die()
 
 func set_team(new_team: Team) -> void:
 	team = new_team
@@ -84,6 +93,28 @@ func set_team(new_team: Team) -> void:
 		_:
 			pass
 
+func get_team() -> Team:
+	return team
+
+# ======================
+# VIDA
+# ======================
+
+func take_damage(amount: int) -> void:
+	health -= amount
+	health = max(health, 0)
+	emit_signal("health_changed", health)
+
+	if health <= 0:
+		die()
+
+func die():
+	print("You are die")
+	emit_signal("reset_game")
+
+# ======================
+# CÁMARA
+# ======================
 
 func rotate_camera(degrees: float) -> void:
 	if rotation_tween and rotation_tween.is_running():
@@ -91,8 +122,7 @@ func rotate_camera(degrees: float) -> void:
 
 	target_rotation_y += deg_to_rad(degrees)
 
-	# Evita tweens superpuestos
-	if rotation_tween and rotation_tween.is_running():
+	if rotation_tween:
 		rotation_tween.kill()
 
 	rotation_tween = create_tween()
@@ -110,46 +140,57 @@ func rotate_camera(degrees: float) -> void:
 		camera_3d.look_at(global_position, Vector3.UP)
 	)
 
-func get_team() -> Team:
-	return team
+# ======================
+# READY
+# ======================
 
 func _ready():
 	target_rotation_y = camera_pivot.rotation.y
 	camera_3d.look_at(global_position, Vector3.UP)
 	mesh_base_position = mesh.position
 
+# ======================
+# PHYSICS
+# ======================
 
 func _physics_process(delta: float) -> void:
 	label_3d.text = str(get_team())
 
-	# Gravedad
+	# ---- Gravedad ----
 	if not is_on_floor():
 		velocity += get_gravity() * delta
-	
+
+	# ---- Salto ----
 	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
-		velocity.y += JUMP_VELOCITY
-	# Input de cámara
+		velocity.y = JUMP_VELOCITY
+
+	# ---- Cámara ----
 	if Input.is_action_just_pressed("camera_left"):
 		rotate_camera(-ROTATION_STEP)
 	elif Input.is_action_just_pressed("camera_right"):
 		rotate_camera(ROTATION_STEP)
 
-	# Movimiento relativo a la cámara
+	# ---- Input movimiento ----
 	var input_dir := Input.get_vector("ui_left", "ui_right", "ui_down", "ui_up")
 
-	if input_dir.length() > 0:
-		var basis := camera_pivot.global_transform.basis
-		var forward := -basis.z
-		var right := basis.x
+	var basis := camera_pivot.global_transform.basis
+	var forward := -basis.z
+	var right := basis.x
 
-		var move_dir := (right * input_dir.x + forward * input_dir.y).normalized()
-		velocity.x = move_dir.x * SPEED
-		velocity.z = move_dir.z * SPEED
+	var desired_dir := (right * input_dir.x + forward * input_dir.y)
+	desired_dir.y = 0.0
+
+	if desired_dir.length() > 0:
+		desired_dir = desired_dir.normalized()
+		var desired_velocity := desired_dir * SPEED
+
+		velocity.x = move_toward(velocity.x, desired_velocity.x, ACCELERATION * delta)
+		velocity.z = move_toward(velocity.z, desired_velocity.z, ACCELERATION * delta)
 	else:
-		velocity.x = move_toward(velocity.x, 0, SPEED)
-		velocity.z = move_toward(velocity.z, 0, SPEED)
+		velocity.x = move_toward(velocity.x, 0.0, FRICTION * delta)
+		velocity.z = move_toward(velocity.z, 0.0, FRICTION * delta)
 
-	# 🔥 ROTAR SOLO EL MESH HACIA DONDE SE MUEVE
+	# ---- Rotar mesh ----
 	var horizontal_vel := Vector3(velocity.x, 0, velocity.z)
 	var is_moving := horizontal_vel.length() > 0.05 and is_on_floor()
 
@@ -157,22 +198,29 @@ func _physics_process(delta: float) -> void:
 		var target_yaw := atan2(-horizontal_vel.x, -horizontal_vel.z)
 		mesh.rotation.y = lerp_angle(mesh.rotation.y, target_yaw, TURN_SPEED * delta)
 
-	# Bobbing del mesh
+	# ---- Bobbing + polvo ----
 	if is_moving:
-		bob_time += delta * 40.0 # velocidad del temblor
-		var y_offset := sin(bob_time) * 0.08
+		bob_time += delta * 40.0
+		var current_sin := sin(bob_time)
+		var y_offset := current_sin * 0.08
+
+		if last_sin < 0.0 and current_sin >= 0.0:
+			dust_particles.restart()
+
 		mesh.position = mesh_base_position + Vector3(0, y_offset, 0)
+		last_sin = current_sin
 	else:
 		bob_time = 0.0
+		last_sin = 0.0
 		mesh.position = mesh.position.lerp(mesh_base_position, 10.0 * delta)
 
-	# 🔊 Sonido de pasos
+	# ---- Sonido pasos ----
 	if is_moving:
 		step_delay_timer -= delta
 		if step_delay_timer <= 0.0:
 			step_sound_player.play()
 			step_delay_timer = step_delay
 	else:
-		step_delay_timer = 0.0 # Reinicia cuando no se mueve
+		step_delay_timer = 0.0
 
 	move_and_slide()

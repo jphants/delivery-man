@@ -1,4 +1,4 @@
-[gd_scene load_steps=60 format=4 uid="uid://b1cv0rb0cx1wb"]
+[gd_scene load_steps=61 format=4 uid="uid://b1cv0rb0cx1wb"]
 
 [ext_resource type="Script" uid="uid://b2skp16f3pgfr" path="res://Player/player.gd" id="1_l8h54"]
 [ext_resource type="Texture2D" uid="uid://d3ojt5rllnf8e" path="res://Models/Russian/russian_polar_jacket_Normal.png" id="2_4ntmi"]
@@ -1319,6 +1319,8 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_od3ui")
 
+[sub_resource type="SphereMesh" id="SphereMesh_gwnis"]
+
 [sub_resource type="SphereMesh" id="SphereMesh_btcbx"]
 
 [node name="Player" type="CharacterBody3D" groups=["player"]]
@@ -1377,6 +1379,20 @@ transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, -
 [node name="Old" type="MeshInstance3D" parent="MeshInstance3D/OldSkin"]
 mesh = SubResource("ArrayMesh_4t0ce")
 skeleton = NodePath("")
+
+[node name="DustParticles" type="CPUParticles3D" parent="MeshInstance3D"]
+transform = Transform3D(0.1787324, 0, 0, 0, 0.09190267, 0, 0, 0, 0.0770309, 0, -0.52458006, 0.089267194)
+emitting = false
+amount = 4
+one_shot = true
+explosiveness = 0.2
+mesh = SubResource("SphereMesh_gwnis")
+emission_shape = 3
+emission_box_extents = Vector3(1, 1, 1)
+gravity = Vector3(0, 0.2, 0)
+angle_max = 20.0
+scale_amount_min = 0.2
+scale_amount_max = 0.3
 
 [node name="CameraPivot" type="Node3D" parent="."]
 
