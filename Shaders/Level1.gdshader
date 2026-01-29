@@ -7,11 +7,22 @@ uniform float saturation : hint_range(0.0, 2.0) = 1.6;
 uniform float contrast : hint_range(0.0, 2.0) = 1.3;
 uniform float gamma : hint_range(0.1, 3.0) = 1.0;
 uniform float brightness : hint_range(0.0, 1.0) = 0.0;
-uniform float distortion_strength : hint_range(0.0, 0.05) = 0.02;
-uniform float outline_strength : hint_range(0.0, 1.0) = 0.2;
+uniform float outline_strength : hint_range(0.0, 1.0) = 0.5;
+uniform float light_threshold : hint_range(0.0, 1.0) = 0.5; // Para delimitar luces
 
 vec3 rgb2gray(vec3 color){
     return vec3(dot(color, vec3(0.299,0.587,0.114)));
+}
+
+// Función de toon shading
+vec3 toon_shade(vec3 color, float threshold){
+    // Convertimos a gris para determinar luz
+    float lum = dot(color, vec3(0.299,0.587,0.114));
+    if(lum > threshold){
+        return vec3(1.0); // Luz brillante
+    } else {
+        return vec3(0.0); // Sombra
+    }
 }
 
 void fragment() {
@@ -27,22 +38,21 @@ void fragment() {
     // Contraste
     col.rgb = ((col.rgb - 0.5) * contrast + 0.5);
 
-    // Gamma
+    // Gamma y brillo
     col.rgb = pow(col.rgb, vec3(1.0 / gamma));
-
-    // Brillo
     col.rgb += brightness;
 
-    // --- Outline simple tipo anime ---
-    vec2 offset = vec2(1.0 / 512.0, 1.0 / 512.0); // Ajusta según resolución
+    // --- Outline más marcado usando Sobel simplificado ---
+    vec2 offset = vec2(1.0 / 512.0, 1.0 / 512.0);
     float edge = 0.0;
     edge += length(texture(SCREEN_TEXTURE, uv + vec2(-offset.x, 0)).rgb - col.rgb);
     edge += length(texture(SCREEN_TEXTURE, uv + vec2(offset.x, 0)).rgb - col.rgb);
     edge += length(texture(SCREEN_TEXTURE, uv + vec2(0, -offset.y)).rgb - col.rgb);
     edge += length(texture(SCREEN_TEXTURE, uv + vec2(0, offset.y)).rgb - col.rgb);
-    edge = clamp(edge * 5.0, 0.0, 1.0);
+    edge = clamp(edge * 10.0, 0.0, 1.0); // Multiplicador mayor para bordes más visibles
 
-    col.rgb = mix(col.rgb, vec3(0.0), edge * outline_strength);
+    // Aplicar toon shading a luces
+    col.rgb = mix(toon_shade(col.rgb, light_threshold), col.rgb, 1.0 - edge * outline_strength);
 
     // Mantener transparencia
     COLOR = vec4(col.rgb, col.a);
