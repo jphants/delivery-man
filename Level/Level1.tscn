@@ -10,10 +10,10 @@
 [ext_resource type="PackedScene" uid="uid://dpy1q6nkwpvvl" path="res://Mission/endMission.tscn" id="7_vf83r"]
 [ext_resource type="MeshLibrary" uid="uid://c2n5a1e1ys3oe" path="res://Meshlib/bedrock.tres" id="10_di76u"]
 [ext_resource type="PackedScene" uid="uid://7pgn1ptgxt7k" path="res://Buildings/casino.tscn" id="12_q3rjx"]
-[ext_resource type="PackedScene" path="res://Props/post.tscn" id="13_6ds1n"]
+[ext_resource type="PackedScene" uid="uid://dbt7ushp0ei2a" path="res://Props/post.tscn" id="13_6ds1n"]
 [ext_resource type="PackedScene" uid="uid://bkdc35dj55obg" path="res://Buildings/edificio_2.tscn" id="13_ihfob"]
 [ext_resource type="PackedScene" uid="uid://b6vngyk7d6hbb" path="res://Buildings/edificio_3.tscn" id="14_grst6"]
-[ext_resource type="PackedScene" path="res://Props/bench.tscn" id="14_ihfob"]
+[ext_resource type="PackedScene" uid="uid://dbbdfm8ps25wa" path="res://Props/bench.tscn" id="14_ihfob"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_n58pf"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -32,7 +32,12 @@ glow_hdr_threshold = 0.6
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_sxufl"]
 shader = ExtResource("6_vf83r")
-shader_parameter/saturation = 1.0
+shader_parameter/saturation = 2.0
+shader_parameter/contrast = 1.2
+shader_parameter/gamma = 1.0
+shader_parameter/brightness = 0.0
+shader_parameter/distortion_strength = 0.05
+shader_parameter/outline_strength = 0.2
 
 [sub_resource type="Animation" id="Animation_ics5d"]
 resource_name = "Enemy1_movement"
@@ -55,7 +60,7 @@ building_scene = ExtResource("2_d5det")
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 4.7105427, 3.9980867, 0)
 light_color = Color(0.42060807, 0.6938583, 0.8354343, 1)
-light_energy = 0.005
+light_energy = 0.02
 shadow_enabled = true
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
