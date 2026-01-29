@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://cenl60q65u7y4"]
+[gd_scene load_steps=24 format=3 uid="uid://cenl60q65u7y4"]
 
 [ext_resource type="Script" uid="uid://b1hewj5ikpxxv" path="res://Level/level_1.gd" id="1_di76u"]
 [ext_resource type="PackedScene" uid="uid://b1cv0rb0cx1wb" path="res://Player/player.tscn" id="1_n58pf"]
@@ -8,11 +8,13 @@
 [ext_resource type="Shader" uid="uid://c3f2vv4jkfu6n" path="res://Shaders/Level1.gdshader" id="6_vf83r"]
 [ext_resource type="MeshLibrary" uid="uid://sf13siby6fnt" path="res://Meshlib/bedrock.tres" id="10_di76u"]
 [ext_resource type="PackedScene" uid="uid://7pgn1ptgxt7k" path="res://Buildings/casino.tscn" id="12_q3rjx"]
-[ext_resource type="PackedScene" uid="uid://dbt7ushp0ei2a" path="res://Props/post.tscn" id="13_6ds1n"]
+[ext_resource type="PackedScene" path="res://Props/post.tscn" id="13_6ds1n"]
 [ext_resource type="PackedScene" uid="uid://dsmirbtmumcqg" path="res://PhoneBooths/TransformBooth.tscn" id="13_grst6"]
 [ext_resource type="PackedScene" uid="uid://bkdc35dj55obg" path="res://Buildings/edificio_2.tscn" id="13_ihfob"]
 [ext_resource type="PackedScene" uid="uid://b6vngyk7d6hbb" path="res://Buildings/edificio_3.tscn" id="14_grst6"]
-[ext_resource type="PackedScene" uid="uid://dbbdfm8ps25wa" path="res://Props/bench.tscn" id="14_ihfob"]
+[ext_resource type="PackedScene" path="res://Props/bench.tscn" id="14_ihfob"]
+[ext_resource type="PackedScene" path="res://PhoneBooths/QuestBooth.tscn" id="14_ilpef"]
+[ext_resource type="Resource" uid="uid://xcp5rjbnumlo" path="res://Dialogues/startMission.dialogue" id="15_grst6"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_n58pf"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -325,3 +327,7 @@ target_team = 2
 [node name="PhoneBooth3" parent="Cabinas" instance=ExtResource("13_grst6")]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 52.813465, 1.0834043, 0.44949126)
 target_team = 3
+
+[node name="QuestBooth" parent="Cabinas" instance=ExtResource("14_ilpef")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0141742, -15.789891)
+start_mission_dialogue = ExtResource("15_grst6")
