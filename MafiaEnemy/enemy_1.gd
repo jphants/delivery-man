@@ -2,6 +2,7 @@ extends CharacterBody3D
 
 @onready var exclamation_sign: Node3D = $blockbench_export
 @onready var raycast: RayCast3D = $RayCast3D
+@onready var mesh_instance_3d: MeshInstance3D = $MeshInstance3D
 
 const bullet_scene = preload("uid://dsuxhbxij7r3s")
 
@@ -23,6 +24,9 @@ enum Team {
 var target: Node3D = null
 var can_shoot := true
 
+@onready var russian_skin: Node3D = $MeshInstance3D/RussianSkin
+@onready var italian_skin: Node3D = $MeshInstance3D/ItalianSkin
+@onready var japanese_skin: Node3D = $MeshInstance3D/JapaneseSkin
 
 # ======================
 #  API
@@ -31,10 +35,17 @@ func get_team() -> Team:
 	return team
 
 
+func _hide_all_skins() -> void:
+	russian_skin.visible = false
+	italian_skin.visible = false
+	japanese_skin.visible = false
+
+
 # ======================
 #  LIFECYCLE
 # ======================
 func _ready() -> void:
+	_hide_all_skins()
 	exclamation_sign.visible = false
 	raycast.exclude_parent = true
 	raycast.enabled = true
@@ -45,6 +56,16 @@ func _ready() -> void:
 		detection_area.body_exited.connect(_on_detection_body_exited)
 	else:
 		push_warning("Enemy sin detection_area asignada")
+	
+	match team:
+		Team.TEAM1:
+			russian_skin.visible = true
+		Team.TEAM2:
+			italian_skin.visible = true
+		Team.TEAM3:
+			japanese_skin.visible = true
+		_:
+			pass
 
 func _on_detection_body_entered(body: Node3D) -> void:
 	if body.has_method("get_team") and body.get_team() != team:
@@ -85,6 +106,13 @@ func try_shoot() -> void:
 
 	# Aplicar accuracy
 	var final_dir := apply_accuracy(base_dir)
+
+	base_dir.y = 0
+	base_dir = base_dir.normalized()
+
+	# 🔄 Girar hacia el target
+	var target_yaw := atan2(-base_dir.x, -base_dir.z)
+	mesh_instance_3d.rotation.y = target_yaw
 
 	bullet.direction = final_dir
 	bullet.shooter = self

@@ -10,6 +10,11 @@ enum Team {
 var mesh_base_position: Vector3
 var bob_time := 0.0
 
+@export var step_delay := 0.2 # segundos antes de sonar
+var step_delay_timer := 0.
+
+@onready var step_sound_player: AudioStreamPlayer3D = $StepSoundPlayer
+
 #TEAM MESHES
 
 @onready var russian_skin: Node3D = $MeshInstance3D/RussianSkin
@@ -140,13 +145,13 @@ func _physics_process(delta: float) -> void:
 	# 🔥 ROTAR SOLO EL MESH HACIA DONDE SE MUEVE
 	var horizontal_vel := Vector3(velocity.x, 0, velocity.z)
 
+	var is_moving := horizontal_vel.length() > 0.05 and is_on_floor()
+	
+
 	if horizontal_vel.length() > 0.05:
 		var target_yaw := atan2(-horizontal_vel.x, -horizontal_vel.z)
 
 		mesh.rotation.y = lerp_angle(mesh.rotation.y, target_yaw, TURN_SPEED * delta)
-
-	# 🟢 EFECTO DE SALTITOS DEL MESH
-	var is_moving := horizontal_vel.length() > 0.05
 
 	if is_moving:
 		bob_time += delta * 40.0 # velocidad del temblor
