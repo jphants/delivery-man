@@ -1,9 +1,9 @@
-[gd_scene load_steps=21 format=3 uid="uid://cenl60q65u7y4"]
+[gd_scene load_steps=22 format=3 uid="uid://cenl60q65u7y4"]
 
 [ext_resource type="Script" uid="uid://b1hewj5ikpxxv" path="res://Level/level_1.gd" id="1_di76u"]
 [ext_resource type="PackedScene" uid="uid://b1cv0rb0cx1wb" path="res://Player/player.tscn" id="1_n58pf"]
-[ext_resource type="Script" uid="uid://cecgssyk8b8i3" path="res://Level/enemies.gd" id="2_5gmx1"]
 [ext_resource type="PackedScene" uid="uid://c0qt65k2g2x7l" path="res://Buildings/edificio_1.tscn" id="2_d5det"]
+[ext_resource type="PackedScene" uid="uid://6qjurfsexb5y" path="res://MafiaEnemy/mafiaEnemy.tscn" id="3_6ds1n"]
 [ext_resource type="Script" uid="uid://duk6qs2smbrtm" path="res://Test/canvas_layer.gd" id="4_7lyb7"]
 [ext_resource type="Shader" uid="uid://c3f2vv4jkfu6n" path="res://Shaders/Level1.gdshader" id="6_vf83r"]
 [ext_resource type="MeshLibrary" uid="uid://sf13siby6fnt" path="res://Meshlib/bedrock.tres" id="10_di76u"]
@@ -28,6 +28,9 @@ tonemap_mode = 2
 glow_enabled = true
 glow_bloom = 0.5
 glow_hdr_threshold = 0.6
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_6ds1n"]
+radius = 2.5302193
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_sxufl"]
 shader = ExtResource("6_vf83r")
@@ -54,7 +57,9 @@ _data = {
 
 [node name="Level1" type="Node3D"]
 script = ExtResource("1_di76u")
-building_scene = ExtResource("2_d5det")
+
+[node name="RespawnPoint" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.699448, 0)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 4.7105427, 3.9980867, 0)
@@ -70,8 +75,17 @@ transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 0, 1.530041
 team = 0
 
 [node name="Enemies" type="Node3D" parent="."]
-visible = false
-script = ExtResource("2_5gmx1")
+
+[node name="Enemy1" parent="Enemies" node_paths=PackedStringArray("detection_area") instance=ExtResource("3_6ds1n")]
+transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 0, 3.239256, -4.5228686)
+detection_area = NodePath("Area3D2")
+
+[node name="Area3D2" type="Area3D" parent="Enemies/Enemy1"]
+collision_layer = 7
+collision_mask = 7
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Enemies/Enemy1/Area3D2"]
+shape = SubResource("SphereShape3D_6ds1n")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 script = ExtResource("4_7lyb7")

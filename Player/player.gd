@@ -45,8 +45,11 @@ var rotation_tween: Tween
 @export var team: Team = Team.TEAM2
 signal health_changed(current: int)
 
+signal reset_game  # Signal que se emitirá al morir
+
 func die():
 	print("You are die")
+	emit_signal("reset_game")  # Emitimos el signal
 
 func _hide_all_skins() -> void:
 	old_skin.visible = false

@@ -1,16 +1,18 @@
 extends Node3D
 
-@export var building_scene: PackedScene
+@onready var player: CharacterBody3D = $Player
+@onready var respawn_point: Node3D = $RespawnPoint
 
 func _ready():
-	pass
+	# Conectamos el signal correctamente usando Callable
+	player.connect("reset_game", Callable(self, "_on_player_reset_game"))
 
-func spawn(pos):
-	var b = building_scene.instantiate()
-	b.position = pos
-	print("Edificio")
-	add_child(b)
+func _on_player_reset_game():
+	respawn()
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
+func respawn():
+	# Movemos al jugador al respawn point
+	player.global_transform.origin = respawn_point.global_transform.origin
+	# Reseteamos velocidad si es CharacterBody3D
+	player.velocity = Vector3.ZERO
+	print("Player respawned!")

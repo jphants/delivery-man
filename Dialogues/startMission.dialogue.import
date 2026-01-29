@@ -1,0 +1,16 @@
+[remap]
+
+importer="dialogue_manager"
+importer_version=15
+type="Resource"
+uid="uid://xcp5rjbnumlo"
+path="res://.godot/imported/startMission.dialogue-165edfb772051b8a89775da423169a67.tres"
+
+[deps]
+
+source_file="res://Dialogues/startMission.dialogue"
+dest_files=["res://.godot/imported/startMission.dialogue-165edfb772051b8a89775da423169a67.tres"]
+
+[params]
+
+defaults=true

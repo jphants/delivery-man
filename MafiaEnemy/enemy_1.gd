@@ -28,6 +28,18 @@ var can_shoot := true
 @onready var italian_skin: Node3D = $MeshInstance3D/ItalianSkin
 @onready var japanese_skin: Node3D = $MeshInstance3D/JapaneseSkin
 
+@onready var spotted_sound: AudioStreamPlayer3D = $SpottedSound
+@onready var step_sound: AudioStreamPlayer3D = $StepSound
+@onready var shoot_sound: AudioStreamPlayer3D = $ShootSound
+# ======================
+# Variables para sonidos de pasos
+# ======================
+@export var step_delay := 0.5  # tiempo entre pasos en segundos
+var step_timer := 0.0
+var is_moving := false
+
+var previous_target: Node3D = null  # Para saber si cambió el target
+
 # ======================
 #  API
 # ======================
@@ -79,13 +91,39 @@ func _physics_process(delta: float) -> void:
 	if not is_on_floor():
 		velocity += get_gravity() * delta
 
+	# ======================
+	# Movimiento y pasos
+	# ======================
+	is_moving = velocity.length() > 0.1  # considera que se mueve si velocidad > 0.1
+	is_moving = false
+	if is_moving:
+		step_timer -= delta
+		if step_timer <= 0:
+			if step_sound:
+				step_sound.play()
+			step_timer = step_delay
+	else:
+		step_timer = 0
+
+	# ======================
+	# Detección y disparo
+	# ======================
 	var sees_target := can_see_target()
 	exclamation_sign.visible = sees_target
 
+	# Sonar spotted_sound solo al adquirir target nuevo
 	if sees_target:
+		if target != previous_target:
+			if spotted_sound:
+				spotted_sound.play()
+			previous_target = target
+
 		try_shoot()
+	else:
+		previous_target = null  # Reset cuando pierde target
 
 	move_and_slide()
+
 
 func try_shoot() -> void:
 	if not can_shoot or not bullet_scene or not target:
@@ -94,33 +132,25 @@ func try_shoot() -> void:
 	can_shoot = false
 
 	var bullet: Bullet = bullet_scene.instantiate()
-
-	# 1️⃣ Añadir primero al árbol
 	get_tree().current_scene.add_child(bullet)
-
-	# 2️⃣ Ahora sí: transform global válido
 	bullet.global_position = raycast.global_position
 
-	# Dirección base hacia el target
 	var base_dir := (target.global_position - raycast.global_position).normalized()
-
-	# Aplicar accuracy
 	var final_dir := apply_accuracy(base_dir)
-
 	base_dir.y = 0
 	base_dir = base_dir.normalized()
-
-	# 🔄 Girar hacia el target
 	var target_yaw := atan2(-base_dir.x, -base_dir.z)
 	mesh_instance_3d.rotation.y = target_yaw
 
 	bullet.direction = final_dir
 	bullet.shooter = self
 
-	# Cooldown
+	# Reproducir sonido de disparo
+	if shoot_sound:
+		shoot_sound.play()
+
 	await get_tree().create_timer(shoot_cooldown).timeout
 	can_shoot = true
-
 
 func apply_accuracy(direction: Vector3) -> Vector3:
 	# Si acierta
