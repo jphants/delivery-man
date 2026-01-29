@@ -2,6 +2,7 @@ extends Node3D
 
 @onready var area_3d: Area3D = $Area3D
 @onready var omni_light_3d: OmniLight3D = $OmniLight3D
+@onready var cloth_sound: AudioStreamPlayer3D = $ClothSound
 
 enum Team {
 	NONE,
@@ -29,6 +30,12 @@ func _update_light_color() -> void:
 		omni_light_3d.light_color = team_colors[target_team]
 
 func _on_area_3d_body_entered(body: Node3D) -> void:
-	if body.has_method("set_team"):
+	if body.has_method("get_team"):
+		
+		var body_team = body.get_team()  # obtenemos el team actual del body
+		if body_team != target_team:
+			cloth_sound.play()
+			print(body.name, "matches target team", target_team)
+		else:
+			print(body.name, "does not match target team", target_team)
 		body.set_team(target_team)
-		print(body.name, "team set to", target_team)

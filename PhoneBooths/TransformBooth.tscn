@@ -1,6 +1,7 @@
-[gd_scene load_steps=12 format=4 uid="uid://dsmirbtmumcqg"]
+[gd_scene load_steps=13 format=4 uid="uid://dsmirbtmumcqg"]
 
 [ext_resource type="Script" uid="uid://dir2tci2ggaut" path="res://Test/cabin.gd" id="1_470t7"]
+[ext_resource type="AudioStream" uid="uid://4po557ifg2ev" path="res://SFX/cloth_swap.mp3" id="2_s0j1e"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vviwj"]
 resource_name = "cabina_ss"
@@ -231,5 +232,9 @@ collision_mask = 7
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
 shape = SubResource("BoxShape3D_s0j1e")
+
+[node name="ClothSound" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("2_s0j1e")
+volume_db = -7.0
 
 [connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
