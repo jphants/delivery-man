@@ -1,4 +1,6 @@
-[gd_scene load_steps=10 format=4 uid="uid://dsmirbtmumcqg"]
+[gd_scene load_steps=12 format=4 uid="uid://dsmirbtmumcqg"]
+
+[ext_resource type="Script" uid="uid://dir2tci2ggaut" path="res://Test/cabin.gd" id="1_470t7"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vviwj"]
 resource_name = "cabina_ss"
@@ -161,7 +163,10 @@ size = Vector3(1, 1, 0.06689453)
 
 [sub_resource type="BoxMesh" id="BoxMesh_w86a7"]
 
-[node name="Node3D" type="StaticBody3D"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_s0j1e"]
+
+[node name="PhoneBooth" type="StaticBody3D"]
+script = ExtResource("1_470t7")
 
 [node name="phone_booth" type="MeshInstance3D" parent="."]
 cast_shadow = 0
@@ -218,3 +223,13 @@ skeleton = NodePath("../..")
 transform = Transform3D(1, -5.684342e-14, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 mesh = SubResource("BoxMesh_w86a7")
 skeleton = NodePath("../..")
+
+[node name="Area3D" type="Area3D" parent="."]
+transform = Transform3D(0.68, 0, 0, 0, 0.68, 0, 0, 0, 0.68, 0, 0.6163205, 0)
+collision_layer = 7
+collision_mask = 7
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("BoxShape3D_s0j1e")
+
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
