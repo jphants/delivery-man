@@ -95,6 +95,7 @@ func _ready() -> void:
 	exclamation_sign.visible = false
 	raycast.exclude_parent = true
 	raycast.enabled = true
+	shoot_cooldown = 1
 	randomize()
 
 	if detection_area:
@@ -149,7 +150,6 @@ func _physics_process(delta: float) -> void:
 	exclamation_sign.visible = sees_target
 	update_aim_line(can_aim)
 
-
 	# Sonar spotted_sound solo al adquirir target nuevo
 	if sees_target:
 		if target != previous_target:
@@ -162,7 +162,6 @@ func _physics_process(delta: float) -> void:
 		previous_target = null  # Reset cuando pierde target
 
 	move_and_slide()
-
 
 func try_shoot() -> void:
 	if not can_shoot or not bullet_scene or not target:

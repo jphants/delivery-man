@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://cspe7sy7xd42q"]
+[gd_scene load_steps=29 format=3 uid="uid://cspe7sy7xd42q"]
 
 [ext_resource type="MeshLibrary" uid="uid://dmyw6mpxosx2n" path="res://Meshlib/bedrock.tres" id="1_24by8"]
 [ext_resource type="Script" uid="uid://b1hewj5ikpxxv" path="res://Level/level_1.gd" id="1_y0bex"]
@@ -12,6 +12,9 @@
 [ext_resource type="Shader" uid="uid://c3f2vv4jkfu6n" path="res://Shaders/Level1.gdshader" id="11_hppiw"]
 [ext_resource type="PackedScene" uid="uid://dxavh71evw1m2" path="res://Collectible/collectible.tscn" id="12_hppiw"]
 [ext_resource type="PackedScene" uid="uid://dsmirbtmumcqg" path="res://PhoneBooths/TransformBooth.tscn" id="12_wkw2r"]
+[ext_resource type="PackedScene" path="res://PhoneBooths/QuestBooth.tscn" id="13_8noqt"]
+[ext_resource type="PackedScene" uid="uid://6qjurfsexb5y" path="res://MafiaEnemy/mafiaEnemy.tscn" id="13_wkw2r"]
+[ext_resource type="PackedScene" path="res://PhoneBooths/EndQuestBooth.tscn" id="14_msv6h"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_wkw2r"]
 shader = ExtResource("11_hppiw")
@@ -20,6 +23,42 @@ shader_parameter/highlight_preserve = 0.800000038
 shader_parameter/highlight_strength = 1.0
 shader_parameter/contrast = 1.1000000285
 shader_parameter/brightness = 0.06000000517907
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_8noqt"]
+size = Vector3(6.657959, 1, 18.864075)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_wkw2r"]
+size = Vector3(22.467651, 1, 10.345276)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_msv6h"]
+size = Vector3(18.015442, 1, 7.465454)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_k4rd8"]
+size = Vector3(20.709839, 1, 9.359497)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_kcywq"]
+size = Vector3(14.416626, 1, 19.736328)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_t41u2"]
+size = Vector3(27.032959, 1, 11.820435)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_0627f"]
+size = Vector3(17.211792, 1, 11.583618)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_og82a"]
+size = Vector3(17.211792, 1, 11.583618)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_8s544"]
+size = Vector3(17.211792, 1, 11.583618)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_twh62"]
+size = Vector3(37.194794, 1, 11.583618)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_xgu5e"]
+size = Vector3(29.20877, 1, 12.300598)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_gvkg0"]
+size = Vector3(25.341736, 1, 13.090515)
 
 [node name="Level2" type="Node3D"]
 script = ExtResource("1_y0bex")
@@ -40,6 +79,7 @@ transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -10.
 
 [node name="Player" parent="." instance=ExtResource("3_ipglm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 2, 12)
+team = 0
 
 [node name="Edificios" type="Node3D" parent="."]
 
@@ -324,9 +364,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28.904772, 0.8277943, -48.921
 
 [node name="Edificio75" parent="Edificios" instance=ExtResource("5_slqqy")]
 transform = Transform3D(1, 0, 0, 0, 1.2592086, 0, 0, 0, 0.46559298, 28.65373, 1.0529735, -52.126354)
-
-[node name="edificio_21" parent="Edificios" instance=ExtResource("6_y0bex")]
-transform = Transform3D(1, 0, 0, 0, 0.6769811, 0, 0, 0, 1.1419936, -135.34221, 0.97020936, -55.702686)
 
 [node name="Edificio76" parent="Edificios" instance=ExtResource("5_slqqy")]
 transform = Transform3D(1.6957176, 0, 0, 0, 0.4910522, 0, 0, 0, 1.1465508, 29.49517, 1.0699236, -59.96238)
@@ -618,6 +655,42 @@ text = "Health: 100"
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.802248, 1.5287292, 8.723784)
 team = 1
 
+[node name="Collectible2" parent="Collectibles" instance=ExtResource("12_hppiw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.802248, 1.5287292, -23.063602)
+team = 1
+
+[node name="Collectible3" parent="Collectibles" instance=ExtResource("12_hppiw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.07254, 1.5287292, -31.938381)
+team = 1
+
+[node name="Collectible4" parent="Collectibles" instance=ExtResource("12_hppiw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25.199484, 1.5287292, -25.386633)
+team = 1
+
+[node name="Collectible5" parent="Collectibles" instance=ExtResource("12_hppiw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -37.65104, 1.5287292, -32.305595)
+team = 1
+
+[node name="Collectible6" parent="Collectibles" instance=ExtResource("12_hppiw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -23.533293, 1.5287292, -53.31034)
+team = 1
+
+[node name="Collectible7" parent="Collectibles" instance=ExtResource("12_hppiw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.61974, 1.5287292, -53.31034)
+team = 1
+
+[node name="Collectible8" parent="Collectibles" instance=ExtResource("12_hppiw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.71453094, 1.5287292, -62.917)
+team = 1
+
+[node name="Collectible9" parent="Collectibles" instance=ExtResource("12_hppiw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 31.288334, 1.5287292, -79.981415)
+team = 1
+
+[node name="Collectible10" parent="Collectibles" instance=ExtResource("12_hppiw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 31.288334, 1.5287292, -97.030945)
+team = 1
+
 [node name="CabinasTrans" type="Node3D" parent="."]
 
 [node name="PhoneBooth" parent="CabinasTrans" instance=ExtResource("12_wkw2r")]
@@ -631,3 +704,188 @@ target_team = 2
 [node name="PhoneBooth3" parent="CabinasTrans" instance=ExtResource("12_wkw2r")]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -28.715437, 1.115632, -25.010271)
 target_team = 1
+
+[node name="QuestBooth" parent="CabinasTrans" instance=ExtResource("13_8noqt")]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -9.66019, 0.9675498, 0)
+
+[node name="EndQuestBooth" parent="CabinasTrans" instance=ExtResource("14_msv6h")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -6.322094, 0.9351349, -94.40227)
+
+[node name="Enemies" type="Node3D" parent="."]
+
+[node name="Enemy1" parent="Enemies" node_paths=PackedStringArray("detection_area") instance=ExtResource("13_wkw2r")]
+transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -16.31984, 2.9534426, -32.22744)
+detection_area = NodePath("Area3D2")
+
+[node name="Area3D2" type="Area3D" parent="Enemies/Enemy1"]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Enemies/Enemy1/Area3D2"]
+transform = Transform3D(0.9999823, 0, 0, 0, 1, 0, 0, 0, 0.9999823, -1.0584545, 0, -3.0346107)
+shape = SubResource("BoxShape3D_8noqt")
+
+[node name="Enemy2" parent="Enemies" node_paths=PackedStringArray("detection_area") instance=ExtResource("13_wkw2r")]
+transform = Transform3D(-0.99999994, 0, 8.742277e-08, 0, 1, 0, -8.742277e-08, 0, -0.99999994, -10.228873, 1.8439589, -23.300203)
+shoot_cooldown = 0.8
+detection_area = NodePath("Area3D2")
+team = 2
+
+[node name="Area3D2" type="Area3D" parent="Enemies/Enemy2"]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Enemies/Enemy2/Area3D2"]
+transform = Transform3D(0.9999701, 0, 5.8975047e-13, 0, 1, 0, -5.8975047e-13, 0, 0.9999701, 0.13751698, 0, -2.5702877)
+shape = SubResource("BoxShape3D_wkw2r")
+
+[node name="Enemy3" parent="Enemies" node_paths=PackedStringArray("detection_area") instance=ExtResource("13_wkw2r")]
+transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -29.711092, 7.421423, -15.778746)
+shoot_cooldown = 1.0
+detection_area = NodePath("Area3D2")
+
+[node name="Area3D2" type="Area3D" parent="Enemies/Enemy3"]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Enemies/Enemy3/Area3D2"]
+transform = Transform3D(0.9999779, 0, 0, 0, 1, 0, 0, 0, 0.9999779, -0.9704628, -5.767761, -4.658493)
+shape = SubResource("BoxShape3D_msv6h")
+
+[node name="Enemy4" parent="Enemies" node_paths=PackedStringArray("detection_area") instance=ExtResource("13_wkw2r")]
+transform = Transform3D(-4.3711385e-08, 0, 0.99999994, 0, 1, 0, -0.99999994, 0, -4.3711385e-08, -34.45826, 2.9534426, -24.873222)
+detection_area = NodePath("Area3D2")
+
+[node name="Area3D2" type="Area3D" parent="Enemies/Enemy4"]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Enemies/Enemy4/Area3D2"]
+transform = Transform3D(0.99998343, 0, -8.1712415e-14, 0, 1, 0, 8.1712415e-14, 0, 0.99998343, 7.9070606, 0, -2.077427)
+shape = SubResource("BoxShape3D_k4rd8")
+
+[node name="Enemy5" parent="Enemies" node_paths=PackedStringArray("detection_area") instance=ExtResource("13_wkw2r")]
+transform = Transform3D(-4.3711385e-08, 0, 0.99999994, 0, 1, 0, -0.99999994, 0, -4.3711385e-08, -33.20939, 8.473769, -44.513535)
+detection_area = NodePath("Area3D2")
+
+[node name="Area3D2" type="Area3D" parent="Enemies/Enemy5"]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Enemies/Enemy5/Area3D2"]
+transform = Transform3D(0.99998057, 0, -1.2789769e-13, 0, 1, 0, 1.2789769e-13, 0, 0.99998057, 4.7605057, -7.0383368, 2.9028301)
+shape = SubResource("BoxShape3D_kcywq")
+
+[node name="Enemy6" parent="Enemies" node_paths=PackedStringArray("detection_area") instance=ExtResource("13_wkw2r")]
+transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -26.811745, 8.937572, -47.63149)
+detection_area = NodePath("Area3D2")
+
+[node name="Area3D2" type="Area3D" parent="Enemies/Enemy6"]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Enemies/Enemy6/Area3D2"]
+transform = Transform3D(0.9999783, 0, 0, 0, 1, 0, 0, 0, 0.9999783, -0.15564919, -7.4797373, -3.1435204)
+shape = SubResource("BoxShape3D_t41u2")
+
+[node name="Enemy7" parent="Enemies" node_paths=PackedStringArray("detection_area") instance=ExtResource("13_wkw2r")]
+transform = Transform3D(-0.99999994, 0, -8.742277e-08, 0, 1, 0, 8.742277e-08, 0, -0.99999994, -9.941214, 2.3417797, -56.099766)
+detection_area = NodePath("Area3D2")
+
+[node name="Area3D2" type="Area3D" parent="Enemies/Enemy7"]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Enemies/Enemy7/Area3D2"]
+transform = Transform3D(0.99997807, 0, -3.3395509e-13, 0, 1, 0, 3.3395509e-13, 0, 0.99997807, -5.118415, 0, -3.1894722)
+shape = SubResource("BoxShape3D_0627f")
+
+[node name="Enemy8" parent="Enemies" node_paths=PackedStringArray("detection_area") instance=ExtResource("13_wkw2r")]
+transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 15.356107, 6.536985, -46.595108)
+detection_area = NodePath("Area3D2")
+
+[node name="Area3D2" type="Area3D" parent="Enemies/Enemy8"]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Enemies/Enemy8/Area3D2"]
+transform = Transform3D(0.9999885, 0, 0, 0, 1, 0, 0, 0, 0.9999885, -0.08862114, -5.0741835, -5.354641)
+shape = SubResource("BoxShape3D_og82a")
+
+[node name="Enemy9" parent="Enemies" node_paths=PackedStringArray("detection_area") instance=ExtResource("13_wkw2r")]
+transform = Transform3D(-4.3711385e-08, 0, -0.99999994, 0, 1, 0, 0.99999994, 0, -4.3711385e-08, 20.811165, 2.6303992, -57.81634)
+detection_area = NodePath("Area3D2")
+team = 2
+
+[node name="Area3D2" type="Area3D" parent="Enemies/Enemy9"]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Enemies/Enemy9/Area3D2"]
+transform = Transform3D(0.9999886, 0, 0, 0, 1, 0, 0, 0, 0.9999886, -0.088620685, 0, -0.3109124)
+shape = SubResource("BoxShape3D_0627f")
+
+[node name="Enemy10" parent="Enemies" node_paths=PackedStringArray("detection_area") instance=ExtResource("13_wkw2r")]
+transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 3.5580359, 8.727699, -71.08249)
+detection_area = NodePath("Area3D2")
+team = 2
+
+[node name="Area3D2" type="Area3D" parent="Enemies/Enemy10"]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Enemies/Enemy10/Area3D2"]
+transform = Transform3D(0.99998856, 0, 0, 0, 1, 0, 0, 0, 0.99998856, -0.08862066, -7.0564775, -0.3109131)
+shape = SubResource("BoxShape3D_8s544")
+
+[node name="Enemy11" parent="Enemies" node_paths=PackedStringArray("detection_area") instance=ExtResource("13_wkw2r")]
+transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 48.34445, 2.5941706, -70.92876)
+detection_area = NodePath("Area3D2")
+team = 2
+
+[node name="Area3D2" type="Area3D" parent="Enemies/Enemy11"]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Enemies/Enemy11/Area3D2"]
+transform = Transform3D(0.9999823, 0, 0, 0, 1, 0, 0, 0, 0.9999823, -10.079998, -0.015975952, -0.3109131)
+shape = SubResource("BoxShape3D_twh62")
+
+[node name="Enemy12" parent="Enemies" node_paths=PackedStringArray("detection_area") instance=ExtResource("13_wkw2r")]
+transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 30.534874, 2.9534426, -82.46865)
+detection_area = NodePath("Area3D2")
+team = 3
+
+[node name="Area3D2" type="Area3D" parent="Enemies/Enemy12"]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Enemies/Enemy12/Area3D2"]
+transform = Transform3D(0.9999886, 0, 0, 0, 1, 0, 0, 0, 0.9999886, -0.088620685, 0, -0.3109124)
+shape = SubResource("BoxShape3D_0627f")
+
+[node name="Enemy13" parent="Enemies" node_paths=PackedStringArray("detection_area") instance=ExtResource("13_wkw2r")]
+transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 14.224133, 9.541834, -93.3901)
+detection_area = NodePath("Area3D2")
+team = 3
+
+[node name="Area3D2" type="Area3D" parent="Enemies/Enemy13"]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Enemies/Enemy13/Area3D2"]
+transform = Transform3D(0.99998194, 0, 0, 0, 1, 0, 0, 0, 0.99998194, 5.574629, -7.6557074, -0.66939545)
+shape = SubResource("BoxShape3D_xgu5e")
+
+[node name="Enemy14" parent="Enemies" node_paths=PackedStringArray("detection_area") instance=ExtResource("13_wkw2r")]
+transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -1.456667, 8.548933, -100.2798)
+detection_area = NodePath("Area3D2")
+team = 3
+
+[node name="Area3D2" type="Area3D" parent="Enemies/Enemy14"]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Enemies/Enemy14/Area3D2"]
+transform = Transform3D(0.99998236, 0, 0, 0, 1, 0, 0, 0, 0.99998236, -4.153544, -7.149347, 1.3611069)
+shape = SubResource("BoxShape3D_gvkg0")

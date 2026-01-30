@@ -766,7 +766,7 @@ blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_ttgas")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1vyay"]
-albedo_color = Color(0.7469554, 0.12697488, 0.20526966, 1)
+albedo_color = Color(0.98937374, 0.5644367, 0.5587704, 1)
 
 [node name="Enemy1" type="CharacterBody3D"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 0, 0, 0)
@@ -784,7 +784,8 @@ transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 0, 0, 0)
 [node name="SpotLight3D" type="SpotLight3D" parent="MeshInstance3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.30397585)
 shadow_enabled = true
-spot_angle = 53.91332
+spot_range = 21.05645
+spot_angle = 3.2611394
 
 [node name="RussianSkin" type="Node3D" parent="MeshInstance3D"]
 
@@ -848,7 +849,7 @@ volume_db = -15.0
 
 [node name="Aiming" type="CSGCylinder3D" parent="."]
 transform = Transform3D(0.99999267, 0, 0, 0, 1, -2.9802322e-08, 0, -7.4505806e-08, 0.99999267, 0, 0, 0)
-radius = 0.05
+radius = 0.015
 material = SubResource("StandardMaterial3D_1vyay")
 
 [connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
