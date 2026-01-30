@@ -1,24 +1,45 @@
-[gd_scene load_steps=10 format=3 uid="uid://ck24ufxocw3cl"]
+[gd_scene load_steps=15 format=3 uid="uid://ck24ufxocw3cl"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0b27y"]
-albedo_color = Color(0.59544253, 0.6497656, 0.30226424, 1)
+[ext_resource type="Shader" uid="uid://b2gl11jy3pdhy" path="res://Tiles/pista.gdshader" id="1_5u4tj"]
+[ext_resource type="Shader" uid="uid://cug154mbye4wk" path="res://Tiles/acera.gdshader" id="2_ctcbd"]
+[ext_resource type="Shader" uid="uid://b4m45py8dvmg4" path="res://Tiles/grass.gdshader" id="3_c7q04"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ctcbd"]
+render_priority = 0
+shader = ExtResource("1_5u4tj")
+shader_parameter/concrete_color = Color(0.14120272, 0.14119229, 0.13297695, 1)
+shader_parameter/roughness_base = 0.95
+shader_parameter/metallic_base = 0.02
+shader_parameter/scale = 1.315
+shader_parameter/pore_scale = 25.0
+shader_parameter/pore_strength = 0.6
+shader_parameter/normal_strength = 2.5
 
 [sub_resource type="BoxMesh" id="BoxMesh_5u4tj"]
-material = SubResource("StandardMaterial3D_0b27y")
+material = SubResource("ShaderMaterial_ctcbd")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_5u4tj"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ctcbd"]
-albedo_color = Color(0.7767506, 0.7700567, 0.7600242, 1)
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_c7q04"]
+render_priority = 0
+shader = ExtResource("2_ctcbd")
+shader_parameter/base_color = Color(0.6, 0.6, 0.58, 1)
+shader_parameter/roughness_base = 0.9
+shader_parameter/metallic_base = 0.02
+shader_parameter/scale = 3.0
+shader_parameter/pore_scale = 18.0
+shader_parameter/pore_strength = 0.25
+shader_parameter/wear_strength = 0.15
+shader_parameter/normal_strength = 1.5
 
 [sub_resource type="BoxMesh" id="BoxMesh_c7q04"]
-material = SubResource("StandardMaterial3D_ctcbd")
+material = SubResource("ShaderMaterial_c7q04")
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_djc5e"]
-albedo_color = Color(0.9278557, 0.551155, 0.4560002, 1)
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ctcbd"]
+albedo_color = Color(0.3085097, 0.31989962, 0.28942367, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_bbq2c"]
-material = SubResource("StandardMaterial3D_djc5e")
+material = SubResource("StandardMaterial3D_ctcbd")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5u4tj"]
 albedo_color = Color(0, 0, 0, 1)
@@ -26,9 +47,25 @@ albedo_color = Color(0, 0, 0, 1)
 [sub_resource type="BoxMesh" id="BoxMesh_ctcbd"]
 material = SubResource("StandardMaterial3D_5u4tj")
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_djc5e"]
+render_priority = 0
+shader = ExtResource("3_c7q04")
+shader_parameter/grass_color_dark = Color(0.18, 0.35, 0.12, 1)
+shader_parameter/grass_color_light = Color(0.35, 0.55, 0.22, 1)
+shader_parameter/roughness_base = 0.85
+shader_parameter/metallic_base = 0.0
+shader_parameter/scale = 6.0
+shader_parameter/detail_scale = 25.0
+shader_parameter/color_variation = 0.6
+shader_parameter/normal_strength = 1.5
+
+[sub_resource type="BoxMesh" id="BoxMesh_i8l3s"]
+material = SubResource("ShaderMaterial_djc5e")
+
 [node name="ML1" type="Node3D"]
 
 [node name="Pista" type="MeshInstance3D" parent="."]
+visible = false
 mesh = SubResource("BoxMesh_5u4tj")
 
 [node name="GroundTest" type="StaticBody3D" parent="Pista"]
@@ -39,6 +76,7 @@ collision_mask = 2
 shape = SubResource("BoxShape3D_5u4tj")
 
 [node name="Acera" type="MeshInstance3D" parent="."]
+visible = false
 mesh = SubResource("BoxMesh_c7q04")
 
 [node name="GroundTest" type="StaticBody3D" parent="Acera"]
@@ -49,6 +87,7 @@ collision_mask = 2
 shape = SubResource("BoxShape3D_5u4tj")
 
 [node name="Edificio" type="MeshInstance3D" parent="."]
+visible = false
 mesh = SubResource("BoxMesh_bbq2c")
 
 [node name="GroundTest" type="StaticBody3D" parent="Edificio"]
@@ -59,6 +98,7 @@ collision_mask = 2
 shape = SubResource("BoxShape3D_5u4tj")
 
 [node name="Void" type="MeshInstance3D" parent="."]
+visible = false
 mesh = SubResource("BoxMesh_ctcbd")
 
 [node name="GroundTest" type="StaticBody3D" parent="Void"]
@@ -66,4 +106,14 @@ collision_layer = 2
 collision_mask = 2
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Void/GroundTest"]
+shape = SubResource("BoxShape3D_5u4tj")
+
+[node name="Grass" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_i8l3s")
+
+[node name="GroundTest" type="StaticBody3D" parent="Grass"]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Grass/GroundTest"]
 shape = SubResource("BoxShape3D_5u4tj")
