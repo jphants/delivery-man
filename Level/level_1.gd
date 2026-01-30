@@ -8,6 +8,7 @@ func _ready():
 	player.connect("reset_game", Callable(self, "_on_player_reset_game"))
 
 func _on_player_reset_game():
+	player.set_health(100)
 	respawn()
 
 func respawn():

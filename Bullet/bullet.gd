@@ -3,7 +3,7 @@ class_name Bullet
 
 @export var speed: float = 30.0
 @export var lifetime: float = 3.0
-@export var damage: int = 1
+@export var damage: int = 10
 
 var direction: Vector3 = Vector3.ZERO
 var shooter: Node3D = null

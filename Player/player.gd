@@ -46,7 +46,7 @@ var rotation_tween: Tween
 # ======================
 
 const MAX_HEALTH := 100
-var health := 100
+var health := 20
 
 @export var team: Team = Team.TEAM2
 signal health_changed(current: int)
@@ -74,6 +74,9 @@ signal reset_game
 # ======================
 # FUNCIONES DE TEAM
 # ======================
+
+func set_health(received : int):
+	health = received
 
 func _hide_all_skins() -> void:
 	old_skin.visible = false
