@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://cspe7sy7xd42q"]
+[gd_scene load_steps=8 format=3 uid="uid://cspe7sy7xd42q"]
 
 [ext_resource type="MeshLibrary" uid="uid://bpj8ltx13wkcn" path="res://Meshlib/bedrock.tres" id="1_24by8"]
 [ext_resource type="PackedScene" uid="uid://7pgn1ptgxt7k" path="res://Buildings/casino.tscn" id="2_jfqli"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://c0qt65k2g2x7l" path="res://Buildings/edificio_1.tscn" id="4_5ruie"]
 [ext_resource type="PackedScene" uid="uid://bkdc35dj55obg" path="res://Buildings/edificio_2.tscn" id="5_slqqy"]
 [ext_resource type="PackedScene" uid="uid://b6vngyk7d6hbb" path="res://Buildings/edificio_3.tscn" id="6_y0bex"]
+[ext_resource type="PackedScene" path="res://Props/post.tscn" id="7_slqqy"]
 
 [node name="Level2" type="Node3D"]
 
@@ -37,7 +38,7 @@ transform = Transform3D(-4.371139e-08, 0, 1.7851444, 0, 1, 0, -1, 0, -7.803114e-
 transform = Transform3D(-5.5280534e-08, 0, 1.2096853, 0, 0.989088, 0, -1.2646712, 0, -5.2877024e-08, -6.370949, 1.0163202, -25.280777)
 
 [node name="Edificio4" parent="Edificios" instance=ExtResource("5_slqqy")]
-transform = Transform3D(-1.4777873, 0, -8.742278e-08, 0, 1.2647207, 0, 1.2919226e-07, 0, -1, -9.471231, 1.049756, -9.327742)
+transform = Transform3D(-1.4777873, 0, -8.742278e-08, 0, 1.2647207, 0, 1.2919226e-07, 0, -1, -9.370723, 1.049756, -9.327742)
 
 [node name="Edificio5" parent="Edificios" instance=ExtResource("4_5ruie")]
 transform = Transform3D(-1.5922325, 0, -1.02340486e-07, 0, 1, 0, 1.3919738e-07, 0, -1.1706387, -9.558939, 1.0209522, -13.786579)
@@ -91,7 +92,7 @@ transform = Transform3D(-6.342686e-08, 0, -2.3589714, 0, 1.4317317, 0, 1.4510375
 transform = Transform3D(-8.811989e-08, 0, 1, 0, 1, 0, -2.015948, 0, -4.371139e-08, -2.2008443, 0.9915495, -25.919361)
 
 [node name="Edificio18" parent="Edificios" instance=ExtResource("4_5ruie")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1.2969028, 0, 1.024055, -20.834085)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1.2969028, 1.0690789, 1.024055, -20.834085)
 
 [node name="edificio_7" parent="Edificios" instance=ExtResource("6_y0bex")]
 transform = Transform3D(2.3509912, 0, 0, 0, 1, 0, 0, 0, 1, -11.510842, 0.543169, -26.151524)
@@ -470,3 +471,35 @@ transform = Transform3D(-6.843837e-08, 0, 0.4553671, 0, 0.93922025, 0, -1.565687
 
 [node name="Edificio118" parent="Edificios" instance=ExtResource("5_slqqy")]
 transform = Transform3D(-4.371139e-08, 0, 0.5431055, 0, 0.70301557, 0, -1, 0, -2.3739895e-08, -7.573104, 0.895051, -100.92218)
+
+[node name="Lights" type="Node3D" parent="."]
+
+[node name="Node3D" parent="Lights" instance=ExtResource("7_slqqy")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -7.722645, 0, -2.9909923)
+
+[node name="Node3D2" parent="Lights" instance=ExtResource("7_slqqy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.20555, 0, -57.40035)
+
+[node name="Node3D3" parent="Lights" instance=ExtResource("7_slqqy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -53.892212)
+
+[node name="Node3D4" parent="Lights" instance=ExtResource("7_slqqy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -41.27142, 0, -38.010586)
+
+[node name="Node3D5" parent="Lights" instance=ExtResource("7_slqqy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -43.327484, 0, -34.703022)
+
+[node name="Node3D6" parent="Lights" instance=ExtResource("7_slqqy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -39.949577, 0, -24.618187)
+
+[node name="Node3D7" parent="Lights" instance=ExtResource("7_slqqy")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -20.225838, 0, -16.790352)
+
+[node name="Node3D8" parent="Lights" instance=ExtResource("7_slqqy")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -13.898632, 0, -23.364426)
+
+[node name="Node3D9" parent="Lights" instance=ExtResource("7_slqqy")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -7.4949856, 0, -16.736935)
+
+[node name="Node3D10" parent="Lights" instance=ExtResource("7_slqqy")]
+transform = Transform3D(0.17364822, 0, -0.9848077, 0, 1, 0, 0.9848077, 0, 0.17364822, -0.6847091, 0, -23.255985)
