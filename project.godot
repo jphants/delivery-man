@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="DeliveryMan"
-run/main_scene="uid://cenl60q65u7y4"
+run/main_scene="uid://cspe7sy7xd42q"
 config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://icon.svg"
 
