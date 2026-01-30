@@ -57,6 +57,7 @@ signal reset_game
 # ======================
 
 @onready var step_sound_player: AudioStreamPlayer3D = $StepSoundPlayer
+@onready var epic_animation: AnimationPlayer = $AnimationPlayer
 
 @onready var russian_skin: Node3D = $MeshInstance3D/RussianSkin
 @onready var italian_skin: Node3D = $MeshInstance3D/ItalianSkin
@@ -86,6 +87,7 @@ func _hide_all_skins() -> void:
 
 func set_team(new_team: Team) -> void:
 	team = new_team
+	epic_animation.play("epic_change")
 	cpu_particles_3d.emitting = true
 	_hide_all_skins()
 

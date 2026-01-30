@@ -353,7 +353,7 @@ transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 49.9
 [node name="Cabinas" type="Node3D" parent="."]
 
 [node name="PhoneBooth" parent="Cabinas" instance=ExtResource("13_grst6")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -0.90286314, 1.057112, -18.501831)
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -0.90286314, 1.057112, -3.1703272)
 target_team = 1
 
 [node name="PhoneBooth2" parent="Cabinas" instance=ExtResource("13_grst6")]

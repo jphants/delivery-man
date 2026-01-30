@@ -20,6 +20,7 @@ config/icon="res://icon.svg"
 GameManager="*res://Autoloads/gameManager.gd"
 DialogueManager="*res://addons/dialogue_manager/dialogue_manager.gd"
 TransitionScreen="*res://TransitionScreen/transitionScreen.tscn"
+AnimationState="*res://Intro/animationState.gd"
 
 [editor_plugins]
 
@@ -82,7 +83,7 @@ dive={
 
 [internationalization]
 
-locale/translations_pot_files=PackedStringArray("res://Dialogues/startMission.dialogue", "res://Dialogues/intro.dialogue", "res://Dialogues/ending.dialogue")
+locale/translations_pot_files=PackedStringArray("res://Dialogues/startMission.dialogue", "res://Dialogues/intro.dialogue", "res://Dialogues/ending.dialogue", "res://Dialogues/sample.dialogue")
 
 [rendering]
 
