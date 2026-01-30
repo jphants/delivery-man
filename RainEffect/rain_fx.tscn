@@ -26,8 +26,9 @@ curve = SubResource("Curve_axvws")
 [node name="RainFX" type="Node3D"]
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="."]
-transform = Transform3D(3.575, 0, 0, 0, 0.08247453, 0, 0, 0, 3.575, 0, 0, 0)
+transform = Transform3D(15.88783, 0, 0, 0, 0.08247453, 0, 0, 0, 14.79884, 0, 0, 0)
 amount = 100
+lifetime = 2.0
 trail_enabled = true
 process_material = SubResource("ParticleProcessMaterial_axvws")
 draw_pass_1 = SubResource("RibbonTrailMesh_cyxk5")

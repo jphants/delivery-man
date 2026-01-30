@@ -46,7 +46,7 @@ var rotation_tween: Tween
 # ======================
 
 const MAX_HEALTH := 100
-var health := 20
+var health := 60
 
 @export var team: Team = Team.TEAM2
 signal health_changed(current: int)
@@ -55,6 +55,25 @@ signal reset_game
 # ======================
 # NODOS
 # ======================
+@onready var lantern: SpotLight3D = $MeshInstance3D/SpotLight3D2
+
+# ======================
+# LANTERN FLICKER
+# ======================
+
+@export var flicker_enabled := true
+
+@export var flicker_min_energy := 0.2
+@export var flicker_max_energy := 1.2
+
+@export var flicker_chance := 0.25   # probabilidad de apagón corto
+@export var flicker_interval_min := 0.05
+@export var flicker_interval_max := 0.25
+
+var lantern_base_energy := 1.0
+var flicker_timer := 0.0
+var next_flicker_time := 0.0
+
 
 @onready var step_sound_player: AudioStreamPlayer3D = $StepSoundPlayer
 @onready var epic_animation: AnimationPlayer = $AnimationPlayer
@@ -166,6 +185,11 @@ func _ready():
 	target_rotation_y = camera_pivot.rotation.y
 	#camera_pivot.look_at(global_position, Vector3.UP)
 	mesh_base_position = mesh.position
+	lantern_base_energy = lantern.light_energy
+	_next_flicker_time()
+
+func _next_flicker_time():
+	next_flicker_time = randf_range(flicker_interval_min, flicker_interval_max)
 
 # ======================
 # PHYSICS
@@ -247,5 +271,26 @@ func _physics_process(delta: float) -> void:
 		drain_health(health_drain_per_second)
 		health_timer = 0.0
 
-	
+	# ---- Lantern flicker ----
+	if flicker_enabled:
+		flicker_timer += delta
+		if flicker_timer >= next_flicker_time:
+			flicker_timer = 0.0
+			_next_flicker_time()
+
+			if randf() < flicker_chance:
+				# Apagón corto
+				lantern.light_energy = 0.0
+			else:
+				# Variación de intensidad
+				lantern.light_energy = lantern_base_energy * randf_range(
+					flicker_min_energy,
+					flicker_max_energy
+				)
+		# Suavizar regreso a normal
+	lantern.light_energy = lerp(
+		lantern.light_energy,
+		lantern_base_energy,
+		8.0 * delta
+	)
 	move_and_slide()

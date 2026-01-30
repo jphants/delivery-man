@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://ck24ufxocw3cl"]
+[gd_scene load_steps=18 format=3 uid="uid://ck24ufxocw3cl"]
 
 [ext_resource type="Shader" uid="uid://b2gl11jy3pdhy" path="res://Tiles/pista.gdshader" id="1_5u4tj"]
 [ext_resource type="Shader" uid="uid://cug154mbye4wk" path="res://Tiles/acera.gdshader" id="2_ctcbd"]
@@ -62,6 +62,97 @@ shader_parameter/normal_strength = 1.5
 [sub_resource type="BoxMesh" id="BoxMesh_i8l3s"]
 material = SubResource("ShaderMaterial_djc5e")
 
+[sub_resource type="Shader" id="Shader_c7q04"]
+code = "shader_type spatial;
+render_mode specular_schlick_ggx, blend_mix;
+
+uniform vec3 shallow_color : source_color = vec3(0.1, 0.35, 0.4);
+uniform vec3 deep_color    : source_color = vec3(0.02, 0.1, 0.2);
+
+uniform float roughness_base : hint_range(0.0, 1.0) = 0.05;
+uniform float metallic_base  : hint_range(0.0, 1.0) = 0.0;
+
+uniform float wave_scale = 2.0;
+uniform float wave_speed = 0.6;
+uniform float wave_strength = 0.25;
+
+uniform float normal_strength = 2.0;
+uniform float fresnel_power = 5.0;
+uniform float transparency = 0.85;
+
+/* -------- NOISE -------- */
+
+float hash(vec2 p) {
+	return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453);
+}
+
+float noise(vec2 p) {
+	vec2 i = floor(p);
+	vec2 f = fract(p);
+
+	float a = hash(i);
+	float b = hash(i + vec2(1.0, 0.0));
+	float c = hash(i + vec2(0.0, 1.0));
+	float d = hash(i + vec2(1.0, 1.0));
+
+	vec2 u = f * f * (3.0 - 2.0 * f);
+	return mix(a, b, u.x) +
+		   (c - a) * u.y * (1.0 - u.x) +
+		   (d - b) * u.x * u.y;
+}
+
+/* -------- SHADER -------- */
+
+void fragment() {
+	vec2 uv = UV * wave_scale;
+	float t = TIME * wave_speed;
+
+	// Ondas animadas
+	float wave1 = noise(uv + vec2(t, 0.0));
+	float wave2 = noise(uv * 1.5 - vec2(0.0, t * 0.7));
+	float waves = (wave1 + wave2) * 0.5;
+
+	// Color del agua
+	vec3 water_color = mix(shallow_color, deep_color, waves);
+	ALBEDO = water_color;
+
+	ROUGHNESS = roughness_base;
+	METALLIC = metallic_base;
+
+	// Fresnel
+	float fresnel = pow(1.0 - clamp(dot(NORMAL, VIEW), 0.0, 1.0), fresnel_power);
+
+	// Normal animada
+	float h = waves * wave_strength;
+	vec3 normal_map = vec3(
+		dFdx(h),
+		dFdy(h),
+		1.0 / normal_strength
+	);
+	NORMAL = normalize(normal_map);
+
+	// Transparencia
+	ALPHA = mix(transparency, 1.0, fresnel);
+}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bbq2c"]
+render_priority = 0
+shader = SubResource("Shader_c7q04")
+shader_parameter/shallow_color = Color(0.1, 0.35, 0.4, 1)
+shader_parameter/deep_color = Color(0.02, 0.1, 0.2, 1)
+shader_parameter/roughness_base = 0.85
+shader_parameter/metallic_base = 0.0
+shader_parameter/wave_scale = 5.775
+shader_parameter/wave_speed = 0.6
+shader_parameter/wave_strength = 0.25
+shader_parameter/normal_strength = 2.0
+shader_parameter/fresnel_power = 5.0
+shader_parameter/transparency = 0.85
+
+[sub_resource type="BoxMesh" id="BoxMesh_60fa1"]
+material = SubResource("ShaderMaterial_bbq2c")
+
 [node name="ML1" type="Node3D"]
 
 [node name="Pista" type="MeshInstance3D" parent="."]
@@ -109,6 +200,7 @@ collision_mask = 2
 shape = SubResource("BoxShape3D_5u4tj")
 
 [node name="Grass" type="MeshInstance3D" parent="."]
+visible = false
 mesh = SubResource("BoxMesh_i8l3s")
 
 [node name="GroundTest" type="StaticBody3D" parent="Grass"]
@@ -116,4 +208,14 @@ collision_layer = 2
 collision_mask = 2
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Grass/GroundTest"]
+shape = SubResource("BoxShape3D_5u4tj")
+
+[node name="Water" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_60fa1")
+
+[node name="GroundTest" type="StaticBody3D" parent="Water"]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Water/GroundTest"]
 shape = SubResource("BoxShape3D_5u4tj")

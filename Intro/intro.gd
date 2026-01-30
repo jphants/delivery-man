@@ -1,7 +1,7 @@
 extends Control
 
 const INTRO = preload("uid://b67j2lfcjk2q6")
-const LEVEL_1 = preload("uid://cenl60q65u7y4")
+const LEVEL_1 = preload("res://Level2/level_2.tscn")
 
 @onready var image: TextureRect = $TextureRect
 @onready var intro_controller := $IntroController # ajusta el path si es distinto

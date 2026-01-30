@@ -1,8 +1,10 @@
-[gd_scene load_steps=10 format=4 uid="uid://dxavh71evw1m2"]
+[gd_scene load_steps=12 format=4 uid="uid://dxavh71evw1m2"]
 
 [ext_resource type="Script" uid="uid://br646yksqq7y7" path="res://Collectible/collectible.gd" id="1_pel21"]
 [ext_resource type="Texture2D" uid="uid://du3aolvd1lm5" path="res://Models/Green sign/exclamation_sign_0.png" id="2_gvrau"]
+[ext_resource type="PackedScene" uid="uid://d3j4hopctrn8g" path="res://Models/Collect/gato_low.glb" id="3_ap31m"]
 [ext_resource type="AudioStream" uid="uid://d0ns0jqb6rxig" path="res://SFX/rewind.mp3" id="3_kposw"]
+[ext_resource type="PackedScene" uid="uid://b7n4upksbe0iq" path="res://Models/Collect/lasaña.glb" id="4_krkjt"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2domu"]
 resource_name = "material_0"
@@ -83,20 +85,26 @@ shadow_mesh = SubResource("ArrayMesh_xp07t")
 [node name="Collectible" type="StaticBody3D"]
 script = ExtResource("1_pel21")
 
-[node name="blockbench_export" type="Node3D" parent="."]
-transform = Transform3D(0.24, 0, 0, 0, 0.24, 0, 0, 0, 0.24, 0, 0.60057425, 0)
+[node name="ModelSkins" type="Node3D" parent="."]
 
-[node name="sphere" type="MeshInstance3D" parent="blockbench_export"]
+[node name="gato_low" parent="ModelSkins" instance=ExtResource("3_ap31m")]
+transform = Transform3D(0.59, 0, 0, 0, 0.59, 0, 0, 0, 0.59, 0, 0, 0)
+
+[node name="lasaña2" parent="ModelSkins" instance=ExtResource("4_krkjt")]
+transform = Transform3D(0.29, 0, 0, 0, 0.29, 0, 0, 0, 0.29, 0, 0, 0)
+visible = false
+
+[node name="blockbench_export" type="Node3D" parent="ModelSkins"]
+transform = Transform3D(0.24, 0, 0, 0, 0.24, 0, 0, 0, 0.24, 0, 0.8225788, 0)
+
+[node name="sphere" type="MeshInstance3D" parent="ModelSkins/blockbench_export"]
 mesh = SubResource("ArrayMesh_tgjqo")
 skeleton = NodePath("")
 
-[node name="cylinder" type="MeshInstance3D" parent="blockbench_export"]
+[node name="cylinder" type="MeshInstance3D" parent="ModelSkins/blockbench_export"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.625, 0)
 mesh = SubResource("ArrayMesh_0j8al")
 skeleton = NodePath("")
-
-[node name="OmniLight3D" type="OmniLight3D" parent="."]
-omni_range = 0.78541
 
 [node name="Area3D" type="Area3D" parent="."]
 collision_layer = 3
@@ -108,6 +116,11 @@ shape = SubResource("BoxShape3D_gvrau")
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("3_kposw")
 volume_db = -5.0
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6044959, 0.34177035)
+light_energy = 2.0
+omni_range = 1.1140809
 
 [connection signal="body_entered" from="Area3D" to="." method="_on_body_entered"]
 [connection signal="body_exited" from="Area3D" to="." method="_on_body_exited"]
