@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://1uiv1rymkdu"]
+
+[ext_resource type="Texture2D" uid="uid://bc3pti2oe15j5" path="res://HDRI/moonless_golf_2k.hdr" id="1_qmv3g"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_85xks"]
+panorama = ExtResource("1_qmv3g")
+
+[sub_resource type="Sky" id="Sky_1rv4e"]
+sky_material = SubResource("PanoramaSkyMaterial_85xks")
+
+[sub_resource type="Environment" id="Environment_n0odj"]
+background_mode = 2
+sky = SubResource("Sky_1rv4e")
+ambient_light_source = 2
+tonemap_mode = 2
+glow_enabled = true
+glow_bloom = 0.5
+glow_hdr_threshold = 0.6
+fog_enabled = true
+fog_density = 0.0025
+adjustment_enabled = true
+adjustment_saturation = 4.71
+
+[node name="WorldEnvironment" type="WorldEnvironment"]
+environment = SubResource("Environment_n0odj")

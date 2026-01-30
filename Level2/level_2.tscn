@@ -1,6 +1,6 @@
-[gd_scene load_steps=17 format=3 uid="uid://cspe7sy7xd42q"]
+[gd_scene load_steps=14 format=3 uid="uid://cspe7sy7xd42q"]
 
-[ext_resource type="MeshLibrary" uid="uid://d3r1ck8dyywrk" path="res://Meshlib/bedrock.tres" id="1_24by8"]
+[ext_resource type="MeshLibrary" uid="uid://dmyw6mpxosx2n" path="res://Meshlib/bedrock.tres" id="1_24by8"]
 [ext_resource type="Script" uid="uid://b1hewj5ikpxxv" path="res://Level/level_1.gd" id="1_y0bex"]
 [ext_resource type="PackedScene" uid="uid://7pgn1ptgxt7k" path="res://Buildings/casino.tscn" id="2_jfqli"]
 [ext_resource type="PackedScene" uid="uid://b1cv0rb0cx1wb" path="res://Player/player.tscn" id="3_ipglm"]
@@ -8,33 +8,15 @@
 [ext_resource type="PackedScene" uid="uid://bkdc35dj55obg" path="res://Buildings/edificio_2.tscn" id="5_slqqy"]
 [ext_resource type="PackedScene" uid="uid://b6vngyk7d6hbb" path="res://Buildings/edificio_3.tscn" id="6_y0bex"]
 [ext_resource type="PackedScene" uid="uid://dbt7ushp0ei2a" path="res://Props/post.tscn" id="7_slqqy"]
-[ext_resource type="Texture2D" uid="uid://bc3pti2oe15j5" path="res://HDRI/moonless_golf_2k.hdr" id="9_cy2br"]
 [ext_resource type="Script" uid="uid://duk6qs2smbrtm" path="res://Test/canvas_layer.gd" id="10_n0odj"]
 [ext_resource type="Shader" uid="uid://c3f2vv4jkfu6n" path="res://Shaders/Level1.gdshader" id="11_hppiw"]
 [ext_resource type="PackedScene" uid="uid://dxavh71evw1m2" path="res://Collectible/collectible.tscn" id="12_hppiw"]
-
-[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_85xks"]
-panorama = ExtResource("9_cy2br")
-
-[sub_resource type="Sky" id="Sky_1rv4e"]
-sky_material = SubResource("PanoramaSkyMaterial_85xks")
-
-[sub_resource type="Environment" id="Environment_n0odj"]
-background_mode = 2
-sky = SubResource("Sky_1rv4e")
-ambient_light_source = 2
-tonemap_mode = 2
-glow_enabled = true
-glow_bloom = 0.5
-glow_hdr_threshold = 0.6
-fog_enabled = true
-fog_mode = 1
-fog_density = 1.0
+[ext_resource type="PackedScene" uid="uid://dsmirbtmumcqg" path="res://PhoneBooths/TransformBooth.tscn" id="12_wkw2r"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_wkw2r"]
 shader = ExtResource("11_hppiw")
-shader_parameter/sepia_amount = 0.6000000285
-shader_parameter/highlight_preserve = 0.550000026125
+shader_parameter/sepia_amount = 0.550000026125
+shader_parameter/highlight_preserve = 0.800000038
 shader_parameter/highlight_strength = 1.0
 shader_parameter/contrast = 1.1000000285
 shader_parameter/brightness = 0.06000000517907
@@ -104,7 +86,7 @@ transform = Transform3D(-1.3085571e-07, 0, 1.8345349, 0, 1.1823709, 0, -2.993629
 transform = Transform3D(-2.0089985e-07, 0, 0.6206094, 0, 2.2613914, 0, -4.5960526, 0, -2.7127697e-08, -21.179272, 0.70392084, -28.871252)
 
 [node name="Edificio14" parent="Edificios" instance=ExtResource("5_slqqy")]
-transform = Transform3D(-1.9330434e-07, 0, 0.67558235, 0, 1.943079, 0, -4.422288, 0, -2.953064e-08, -31.656906, 1.0010786, -28.350897)
+transform = Transform3D(-1.9330434e-07, 0, 0.67558235, 0, 1.943079, 0, -4.422288, 0, -2.953064e-08, -31.656906, 1.0010786, -28.251596)
 
 [node name="edificio_3" parent="Edificios" instance=ExtResource("6_y0bex")]
 transform = Transform3D(2.3966434, 0, 0, 0, 0.7501973, 0, 0, 0, 1, -30.67048, 1.041049, -35.1866)
@@ -206,7 +188,7 @@ transform = Transform3D(-0.99999994, 0, 5.7284616e-08, 0, 1.8195794, 0, -8.74227
 transform = Transform3D(-1.775273, 0, 1.0241216e-07, 0, 1, 0, -1.5519929e-07, 0, -1.1714585, -42.83727, 0.98202515, -31.948729)
 
 [node name="Edificio39" parent="Edificios" instance=ExtResource("4_5ruie")]
-transform = Transform3D(-1.0000001, 0, 2.3377036e-07, 0, 0.71042055, 0, -8.7422784e-08, 0, -2.6740212, -41.89653, 0.9878197, -40.462555)
+transform = Transform3D(-1.0000001, 0, 2.3377036e-07, 0, 0.71042055, 0, -8.7422784e-08, 0, -2.6740212, -43.07907, 0.9878197, -40.462555)
 
 [node name="Edificio40" parent="Edificios" instance=ExtResource("5_slqqy")]
 transform = Transform3D(-1, 0, 7.155363e-08, 0, 2.0397916, 0, -8.742278e-08, 0, -0.8184781, -43.933247, 0, -36.412)
@@ -305,7 +287,7 @@ transform = Transform3D(2.5652595, 0, 0, 0, 1, 0, 0, 0, 0.7253885, 6.530899, 0.9
 transform = Transform3D(-0.6553615, 0, -1.2423739e-07, 0, 1, 0, 5.7293523e-08, 0, -1.42111, 19.312729, 0.94320154, -60.073517)
 
 [node name="Edificio65" parent="Edificios" instance=ExtResource("4_5ruie")]
-transform = Transform3D(2.0303504, 0, 0, 0, 0.67472386, 0, 0, 0, 1.3478976, 8.08201, 0.97759056, -65.01702)
+transform = Transform3D(2.0303504, 0, 0, 0, 0.67472386, 0, 0, 0, 1.3478976, 8.612299, 0.97759056, -65.01702)
 
 [node name="Edificio66" parent="Edificios" instance=ExtResource("5_slqqy")]
 transform = Transform3D(-5.807045e-08, 0, 1, 0, 1, 0, -1.328497, 0, -4.371139e-08, 5.7162457, 1.0094366, -57.96779)
@@ -344,7 +326,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28.904772, 0.8277943, -48.921
 transform = Transform3D(1, 0, 0, 0, 1.2592086, 0, 0, 0, 0.46559298, 28.65373, 1.0529735, -52.126354)
 
 [node name="edificio_21" parent="Edificios" instance=ExtResource("6_y0bex")]
-transform = Transform3D(1, 0, 0, 0, 0.6769811, 0, 0, 0, 1.1419936, 28.729048, 0.97020936, -55.702686)
+transform = Transform3D(1, 0, 0, 0, 0.6769811, 0, 0, 0, 1.1419936, -135.34221, 0.97020936, -55.702686)
 
 [node name="Edificio76" parent="Edificios" instance=ExtResource("5_slqqy")]
 transform = Transform3D(1.6957176, 0, 0, 0, 0.4910522, 0, 0, 0, 1.1465508, 29.49517, 1.0699236, -59.96238)
@@ -491,7 +473,7 @@ transform = Transform3D(-4.371139e-08, 0, 0.6126952, 0, 0.55996966, 0, -1, 0, -2
 transform = Transform3D(-2.4737805e-08, 0, 1.5305438, 0, 0.4290502, 0, -0.565935, 0, -6.6902196e-08, 8.933102, 1.1192493, -100.42737)
 
 [node name="Edificio113" parent="Edificios" instance=ExtResource("4_5ruie")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 33.064907, 0.9546838, -101.01019)
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 33.064907, 0.9546838, -100.89146)
 
 [node name="Edificio114" parent="Edificios" instance=ExtResource("5_slqqy")]
 transform = Transform3D(-4.371139e-08, 0, 0.48578793, 0, 0.74613285, 0, -1, 0, -2.1234465e-08, -11.499362, 1.0459218, -100.93651)
@@ -508,25 +490,28 @@ transform = Transform3D(-6.843837e-08, 0, 0.4553671, 0, 0.93922025, 0, -1.565687
 [node name="Edificio118" parent="Edificios" instance=ExtResource("5_slqqy")]
 transform = Transform3D(-4.371139e-08, 0, 0.5431055, 0, 0.70301557, 0, -1, 0, -2.3739895e-08, -7.573104, 0.895051, -100.92218)
 
+[node name="edificio_35" parent="Edificios" instance=ExtResource("6_y0bex")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1.1440034, 28.952343, 1.1574907, -55.595535)
+
 [node name="Lights" type="Node3D" parent="."]
 
 [node name="Node3D" parent="Lights" instance=ExtResource("7_slqqy")]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -7.722645, 0, -2.9909923)
 
 [node name="Node3D2" parent="Lights" instance=ExtResource("7_slqqy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.20555, 0, -57.40035)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -40.284485, 0, -56.333633)
 
 [node name="Node3D3" parent="Lights" instance=ExtResource("7_slqqy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -53.892212)
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 3.3191829, 0, -62.99121)
 
 [node name="Node3D4" parent="Lights" instance=ExtResource("7_slqqy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -41.27142, 0, -38.010586)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -33.557976, 0, -29.879417)
 
 [node name="Node3D5" parent="Lights" instance=ExtResource("7_slqqy")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -43.327484, 0, -34.703022)
 
 [node name="Node3D6" parent="Lights" instance=ExtResource("7_slqqy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -39.949577, 0, -24.618187)
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -40.28866, 0, -16.77341)
 
 [node name="Node3D7" parent="Lights" instance=ExtResource("7_slqqy")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -20.225838, 0, -16.790352)
@@ -540,14 +525,53 @@ transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -7.4
 [node name="Node3D10" parent="Lights" instance=ExtResource("7_slqqy")]
 transform = Transform3D(0.17364822, 0, -0.9848077, 0, 1, 0, 0.9848077, 0, 0.17364822, -0.6847091, 0, -23.255985)
 
+[node name="Node3D11" parent="Lights" instance=ExtResource("7_slqqy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.215828, 0, -56.478447)
+
+[node name="Node3D12" parent="Lights" instance=ExtResource("7_slqqy")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 34.437023, -0.43353367, -90.16776)
+
+[node name="Node3D13" parent="Lights" instance=ExtResource("7_slqqy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.33002, 1.0722656, -73.86709)
+
+[node name="Node3D14" parent="Lights" instance=ExtResource("7_slqqy")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 6.452491, 0, -47.41867)
+
+[node name="Node3D15" parent="Lights" instance=ExtResource("7_slqqy")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 39.292496, 0, -67.46496)
+
+[node name="Node3D16" parent="Lights" instance=ExtResource("7_slqqy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28.72573, 0, -79.18929)
+
+[node name="Node3D17" parent="Lights" instance=ExtResource("7_slqqy")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 8.549353, 0, -94.875755)
+
+[node name="Node3D18" parent="Lights" instance=ExtResource("7_slqqy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25.37991, 0, -99.23096)
+
+[node name="Node3D19" parent="Lights" instance=ExtResource("7_slqqy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2836217, 0, -74.15668)
+
+[node name="Node3D20" parent="Lights" instance=ExtResource("7_slqqy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -23.701168, 0, -23.59986)
+
+[node name="Node3D21" parent="Lights" instance=ExtResource("7_slqqy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -40.543556, 0, -42.93831)
+
+[node name="Node3D22" parent="Lights" instance=ExtResource("7_slqqy")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -19.702755, 0, -47.494366)
+
+[node name="Node3D23" parent="Lights" instance=ExtResource("7_slqqy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.279772, 0, -56.368866)
+
+[node name="Node3D24" parent="Lights" instance=ExtResource("7_slqqy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 27.207762, 0, -62.497147)
+
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 4.7105427, 17.152899, 0)
 light_color = Color(0.42060807, 0.6938583, 0.8354343, 1)
 light_energy = 0.05
 shadow_enabled = true
-
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_n0odj")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 script = ExtResource("10_n0odj")
@@ -593,3 +617,17 @@ text = "Health: 100"
 [node name="Collectible" parent="Collectibles" instance=ExtResource("12_hppiw")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.802248, 1.5287292, 8.723784)
 team = 1
+
+[node name="CabinasTrans" type="Node3D" parent="."]
+
+[node name="PhoneBooth" parent="CabinasTrans" instance=ExtResource("12_wkw2r")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 35.79319, 1.087543, -94.32644)
+target_team = 3
+
+[node name="PhoneBooth2" parent="CabinasTrans" instance=ExtResource("12_wkw2r")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.2309704, 0.9929893, -66.93919)
+target_team = 2
+
+[node name="PhoneBooth3" parent="CabinasTrans" instance=ExtResource("12_wkw2r")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -28.715437, 1.115632, -25.010271)
+target_team = 1

@@ -1,8 +1,8 @@
 [gd_scene load_steps=20 format=3 uid="uid://ck24ufxocw3cl"]
 
 [ext_resource type="Shader" uid="uid://b2gl11jy3pdhy" path="res://Tiles/pista.gdshader" id="1_5u4tj"]
-[ext_resource type="Shader" uid="uid://cug154mbye4wk" path="res://Tiles/acera.gdshader" id="2_ctcbd"]
-[ext_resource type="Shader" uid="uid://b4m45py8dvmg4" path="res://Tiles/grass.gdshader" id="3_c7q04"]
+[ext_resource type="Shader" path="res://Tiles/acera.gdshader" id="2_ctcbd"]
+[ext_resource type="Shader" path="res://Tiles/grass.gdshader" id="3_c7q04"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ctcbd"]
 render_priority = 0
@@ -10,13 +10,16 @@ shader = ExtResource("1_5u4tj")
 shader_parameter/concrete_color = Color(0.14120272, 0.14119229, 0.13297695, 1)
 shader_parameter/roughness_base = 0.95
 shader_parameter/metallic_base = 0.02
-shader_parameter/scale = 1.315
-shader_parameter/pore_scale = 25.0
+shader_parameter/scale = 6.0
+shader_parameter/pore_density = 3.0
+shader_parameter/pore_size = 0.25
 shader_parameter/pore_strength = 0.6
 shader_parameter/normal_strength = 2.5
 
 [sub_resource type="BoxMesh" id="BoxMesh_5u4tj"]
+lightmap_size_hint = Vector2i(14, 21)
 material = SubResource("ShaderMaterial_ctcbd")
+add_uv2 = true
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_5u4tj"]
 
@@ -160,7 +163,8 @@ shader_parameter/concrete_color = Color(0.7931651, 0.79320836, 0.7802663, 1)
 shader_parameter/roughness_base = 0.95
 shader_parameter/metallic_base = 0.02
 shader_parameter/scale = 1.315
-shader_parameter/pore_scale = 25.0
+shader_parameter/pore_density = 20.0
+shader_parameter/pore_size = 0.25
 shader_parameter/pore_strength = 0.6
 shader_parameter/normal_strength = 2.5
 
@@ -170,7 +174,6 @@ material = SubResource("ShaderMaterial_i8l3s")
 [node name="ML1" type="Node3D"]
 
 [node name="Pista" type="MeshInstance3D" parent="."]
-visible = false
 mesh = SubResource("BoxMesh_5u4tj")
 
 [node name="GroundTest" type="StaticBody3D" parent="Pista"]
@@ -236,6 +239,7 @@ collision_mask = 2
 shape = SubResource("BoxShape3D_5u4tj")
 
 [node name="PistaBlanca" type="MeshInstance3D" parent="."]
+visible = false
 mesh = SubResource("BoxMesh_w0n7n")
 
 [node name="GroundTest" type="StaticBody3D" parent="PistaBlanca"]
