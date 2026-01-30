@@ -6,6 +6,7 @@ extends Node3D
 func _ready():
 	# Conectamos el signal correctamente usando Callable
 	player.connect("reset_game", Callable(self, "_on_player_reset_game"))
+	Engine.max_fps = 30
 
 func _on_player_reset_game():
 	player.set_health(100)
