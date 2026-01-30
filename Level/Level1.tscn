@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://cenl60q65u7y4"]
+[gd_scene load_steps=27 format=3 uid="uid://cenl60q65u7y4"]
 
 [ext_resource type="Script" uid="uid://b1hewj5ikpxxv" path="res://Level/level_1.gd" id="1_di76u"]
 [ext_resource type="PackedScene" uid="uid://b1cv0rb0cx1wb" path="res://Player/player.tscn" id="1_n58pf"]
@@ -35,6 +35,9 @@ glow_hdr_threshold = 0.6
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_2f46p"]
 size = Vector3(10.562256, 1, 20.624207)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_jayqs"]
+size = Vector3(15.761978, 1, 27.414917)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_sxufl"]
 shader = ExtResource("6_vf83r")
@@ -91,6 +94,20 @@ collision_mask = 7
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Enemies/Enemy1/Area3D2"]
 transform = Transform3D(0.9999822, 0, 0, 0, 1, 0, 0, 0, 0.9999822, 0.044555664, 0, -9.812068)
 shape = SubResource("BoxShape3D_2f46p")
+
+[node name="Enemy2" parent="Enemies" node_paths=PackedStringArray("detection_area") instance=ExtResource("3_6ds1n")]
+transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 2.0935934, 6.886388, 9.174767)
+shoot_cooldown = 1.0
+detection_area = NodePath("Area3D2")
+
+[node name="Area3D2" type="Area3D" parent="Enemies/Enemy2"]
+transform = Transform3D(0.99999976, 0, 0, 0, 1, 0, 0, 0, 0.99999976, -3.130873, -5.4640703, -3.391735)
+collision_layer = 7
+collision_mask = 7
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Enemies/Enemy2/Area3D2"]
+transform = Transform3D(0.9999821, 0, 0, 0, 1, 0, 0, 0, 0.9999821, 1.7134773, 0, -8.789943)
+shape = SubResource("BoxShape3D_jayqs")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 script = ExtResource("4_7lyb7")
@@ -150,6 +167,21 @@ transform = Transform3D(-8.3381536e-08, 0, 1.0311137, 0, 1, 0, -1.907547, 0, -4.
 
 [node name="Casino" parent="Edificios" instance=ExtResource("12_q3rjx")]
 transform = Transform3D(-1.1908517, 0, -1.2906601e-07, 0, 1.5, 0, 1.0410754e-07, 0, -1.476343, -6.723388, 0.4755888, -4.0521975)
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Edificios/Casino"]
+transform = Transform3D(-4.9326815e-08, 0.5890442, -0.5984831, -3.8399858e-08, 0.47513637, 0.46764287, 0.6773493, 5.5716242e-08, -9.894165e-10, -4.590243, 6.8393655, -4.6081457)
+spot_range = 24.41098
+spot_angle = 45.537342
+
+[node name="SpotLight3D2" type="SpotLight3D" parent="Edificios/Casino"]
+transform = Transform3D(-4.9326815e-08, 0.5890442, -0.598483, -3.8399858e-08, 0.47513637, 0.46764287, 0.6773493, 5.5716242e-08, -9.89413e-10, -4.5902433, 6.8393655, 4.6898403)
+spot_range = 24.41098
+spot_angle = 45.537342
+
+[node name="SpotLight3D3" type="SpotLight3D" parent="Edificios/Casino"]
+transform = Transform3D(-4.9326815e-08, 0.5890442, -0.5984831, -3.8399858e-08, 0.47513637, 0.46764287, 0.6773493, 5.5716242e-08, -9.894165e-10, -4.5902424, 6.8393655, -0.051604986)
+spot_range = 24.41098
+spot_angle = 45.537342
 
 [node name="Edificio" parent="Edificios" instance=ExtResource("2_d5det")]
 transform = Transform3D(1.7673899, 0, 0, 0, 1.1777322, 0, 0, 0, 1, 3.4340363, 0.9960954, -3.7893877)

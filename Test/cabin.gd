@@ -36,6 +36,7 @@ func _on_area_3d_body_entered(body: Node3D) -> void:
 		if body_team != target_team:
 			cloth_sound.play()
 			print(body.name, "matches target team", target_team)
+			body.set_team(target_team)
 		else:
 			print(body.name, "does not match target team", target_team)
-		body.set_team(target_team)
+		
