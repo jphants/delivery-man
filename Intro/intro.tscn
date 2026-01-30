@@ -22,3 +22,9 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("2_1e4v0")
 expand_mode = 1
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+text = "Press space to skip cutsene"

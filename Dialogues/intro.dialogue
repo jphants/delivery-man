@@ -1,7 +1,51 @@
 ~ start
-IT ALL STARTED IN OCEAN CASINO IN 1997
+Omniscient Narrator: It began, as these things so often do, on a Friday night soaked in cheap bravado and expensive regret. Victor Hugo got drunk again — [wave]celebrating[/wave] the arrival of a new year he had already failed. He returned to the same place that had sculpted his current misery. He promised himself restraint. He lied.
+do AnimationState.next_slide()
 
-AQUI VA EL SEGUNDO DIALOGO
+Victor Hugo de la Cruz Guardiola: This is it. Tonight, the world learns my name. I will annihilate every single one of you at this table.
+do AnimationState.next_slide()
 
-Omniscient Narrator: An old man once told me… W A S D to move and Q E to rotate the camera
+INLAND EMPIRE: For funsies. One more glass. You’ve earned it. You survived the week. That counts for something.
+do AnimationState.next_slide()
+
+ELECTROCHEMISTRY: That’s it. Time to be a [speed=0.2]BIG SHOT[/speed].
+do AnimationState.next_slide()
+
+Omniscient Narrator: “It’s rigged,” he slurred, indignation wobbling in his voice. Tomorrow, he will possess nothing but a hangover and a deep, incurable sense of shame.
+do AnimationState.next_slide()
+
+Omniscient Narrator: The money in his hands feels wrong. Too light. Too clean. But excuses are easy when the numbers start to glow. All on seventeen. Red.
+do AnimationState.next_slide()
+
+Mafia Boss: Funny thing about you, Victor. You always think you’re the smartest man in the room.
+Victor Hugo de la Cruz Guardiola: Hah—listen, boss, it’s just a misunderstanding. You know me. I play it straight.
+do AnimationState.next_slide()
+
+Omniscient Narrator: The room tightens. Someone noticed. Someone always does.
+
+* Why did they catch you?
+
+- Option 1: Someone tipped them off. A quiet rat with clean hands.
+- Option 2: The chips were marked. You never asked how.
+- Option 3: You smiled too much. Desperation has a smell.
+
+(do nothing. The truth is irrelevant.)
+do AnimationState.next_slide()
+
+Mafia Boss: You think this was an accident? That this place doesn’t watch its own tables?
+Victor Hugo de la Cruz Guardiola: I was drunk. I mean—celebrating. It won’t happen again. Promise.
+do AnimationState.next_slide()
+
+Omniscient Narrator: Security grips him with professional disappointment and deposits him onto the sidewalk like yesterday’s trash.
+do AnimationState.next_slide()
+
+Omniscient Narrator: His phone vibrates. A lifeline. Or a noose.
+do AnimationState.next_slide()
+
+Mafia Boss: You absolute idiot. Not those bills. They’re tracked.
+Mafia Boss: Use the cabin next to the casino. Wait there. Instructions will follow.
+do AnimationState.next_slide()
+
+Omniscient Narrator: Another message arrives. Different sender. Same fate.
+Plot Device Contact: An old man once told me… W A S D to move. Q E to rotate the camera.
 => END

@@ -1,0 +1,33 @@
+[gd_scene load_steps=5 format=3 uid="uid://h2gidkxonqrk"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_axvws"]
+emission_shape = 3
+emission_box_extents = Vector3(1, 1, 1)
+direction = Vector3(0, -1, 0)
+spread = 5.0
+
+[sub_resource type="Curve" id="Curve_axvws"]
+_limits = [0.0, 0.1, 0.0, 1.0]
+_data = [Vector2(0.03430532, 0), 0.0, 0.10325512, 0, 0, Vector2(0.1004016, 0.056109324), -0.14869082, -0.14869082, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hnco3"]
+transparency = 1
+cull_mode = 2
+shading_mode = 0
+vertex_color_use_as_albedo = true
+albedo_color = Color(1, 1, 0.99607843, 0.08235294)
+use_particle_trails = true
+
+[sub_resource type="RibbonTrailMesh" id="RibbonTrailMesh_cyxk5"]
+material = SubResource("StandardMaterial3D_hnco3")
+curve = SubResource("Curve_axvws")
+
+[node name="RainFX" type="Node3D"]
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+transform = Transform3D(3.575, 0, 0, 0, 0.08247453, 0, 0, 0, 3.575, 0, 0, 0)
+amount = 100
+trail_enabled = true
+process_material = SubResource("ParticleProcessMaterial_axvws")
+draw_pass_1 = SubResource("RibbonTrailMesh_cyxk5")
