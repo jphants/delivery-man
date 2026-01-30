@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://ck24ufxocw3cl"]
+[gd_scene load_steps=20 format=3 uid="uid://ck24ufxocw3cl"]
 
 [ext_resource type="Shader" uid="uid://b2gl11jy3pdhy" path="res://Tiles/pista.gdshader" id="1_5u4tj"]
 [ext_resource type="Shader" uid="uid://cug154mbye4wk" path="res://Tiles/acera.gdshader" id="2_ctcbd"]
@@ -153,6 +153,20 @@ shader_parameter/transparency = 0.85
 [sub_resource type="BoxMesh" id="BoxMesh_60fa1"]
 material = SubResource("ShaderMaterial_bbq2c")
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_i8l3s"]
+render_priority = 0
+shader = ExtResource("1_5u4tj")
+shader_parameter/concrete_color = Color(0.7931651, 0.79320836, 0.7802663, 1)
+shader_parameter/roughness_base = 0.95
+shader_parameter/metallic_base = 0.02
+shader_parameter/scale = 1.315
+shader_parameter/pore_scale = 25.0
+shader_parameter/pore_strength = 0.6
+shader_parameter/normal_strength = 2.5
+
+[sub_resource type="BoxMesh" id="BoxMesh_w0n7n"]
+material = SubResource("ShaderMaterial_i8l3s")
+
 [node name="ML1" type="Node3D"]
 
 [node name="Pista" type="MeshInstance3D" parent="."]
@@ -211,6 +225,7 @@ collision_mask = 2
 shape = SubResource("BoxShape3D_5u4tj")
 
 [node name="Water" type="MeshInstance3D" parent="."]
+visible = false
 mesh = SubResource("BoxMesh_60fa1")
 
 [node name="GroundTest" type="StaticBody3D" parent="Water"]
@@ -218,4 +233,14 @@ collision_layer = 2
 collision_mask = 2
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Water/GroundTest"]
+shape = SubResource("BoxShape3D_5u4tj")
+
+[node name="PistaBlanca" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_w0n7n")
+
+[node name="GroundTest" type="StaticBody3D" parent="PistaBlanca"]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PistaBlanca/GroundTest"]
 shape = SubResource("BoxShape3D_5u4tj")

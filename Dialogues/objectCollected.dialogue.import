@@ -1,0 +1,16 @@
+[remap]
+
+importer="dialogue_manager"
+importer_version=15
+type="Resource"
+uid="uid://ctnbkivk33nrw"
+path="res://.godot/imported/objectCollected.dialogue-765749f03cc774e05d99ebf44a8bb2c2.tres"
+
+[deps]
+
+source_file="res://Dialogues/objectCollected.dialogue"
+dest_files=["res://.godot/imported/objectCollected.dialogue-765749f03cc774e05d99ebf44a8bb2c2.tres"]
+
+[params]
+
+defaults=true

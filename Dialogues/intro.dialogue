@@ -47,5 +47,5 @@ Mafia Boss: Use the cabin next to the casino. Wait there. Instructions will foll
 do AnimationState.next_slide()
 
 Omniscient Narrator: Another message arrives. Different sender. Same fate.
-Plot Device Contact: An old man once told me… W A S D to move. Q E to rotate the camera.
+Plot Device Contact: An old man once told me… W A S D to move. Q E to rotate the camera..... And spacebar to interact.
 => END

@@ -83,7 +83,7 @@ dive={
 
 [internationalization]
 
-locale/translations_pot_files=PackedStringArray("res://Dialogues/startMission.dialogue", "res://Dialogues/intro.dialogue", "res://Dialogues/ending.dialogue", "res://Dialogues/sample.dialogue", "res://Dialogues/reminder.dialogue")
+locale/translations_pot_files=PackedStringArray("res://Dialogues/startMission.dialogue", "res://Dialogues/intro.dialogue", "res://Dialogues/ending.dialogue", "res://Dialogues/sample.dialogue", "res://Dialogues/reminder.dialogue", "res://Dialogues/objectCollected.dialogue")
 
 [rendering]
 

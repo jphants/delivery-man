@@ -9,10 +9,10 @@ enum Team {
 
 @onready var area_3d: Area3D = $Area3D
 @onready var omni_light_3d: OmniLight3D = $OmniLight3D
-@onready var blockbench_export: Node3D = $blockbench_export
 @onready var audio_stream_player_3d: AudioStreamPlayer3D = $AudioStreamPlayer3D
 @onready var gato_low: Node3D = $ModelSkins/gato_low
 @onready var model_skins: Node3D = $ModelSkins
+const OBJECT_COLLECTED = preload("uid://ctnbkivk33nrw")
 
 @export var team: Team
 
@@ -76,7 +76,7 @@ func interact_with_target() -> void:
 		print("💥 Daño aplicado al player (-10)")
 	else:
 		print("⚠️ El target no tiene take_damage()")
-
+	DialogueManager.show_dialogue_balloon(OBJECT_COLLECTED)
 	audio_stream_player_3d.play()
 	area_3d.queue_free()
 	model_skins.visible = false

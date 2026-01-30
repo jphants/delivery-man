@@ -55,5 +55,6 @@ shape = SubResource("CylinderShape3D_4gews")
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.685262, 0.6616197)
 light_color = Color(1, 1, 0, 1)
-light_energy = 0.3
+light_energy = 0.5
 shadow_enabled = true
+omni_range = 7.115344
