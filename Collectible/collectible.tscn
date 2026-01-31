@@ -4,9 +4,9 @@
 [ext_resource type="Texture2D" uid="uid://du3aolvd1lm5" path="res://Models/Green sign/exclamation_sign_0.png" id="2_gvrau"]
 [ext_resource type="Texture2D" uid="uid://cysoodq22blly" path="res://Models/Collect/gato_low_gato_BaseColor.png" id="2_qna5r"]
 [ext_resource type="Texture2D" uid="uid://c5xpd84cjvnwk" path="res://Models/Collect/gato_low_gato_Metallic.png-gato_Roughness.png" id="3_i6f3t"]
-[ext_resource type="AudioStream" uid="uid://d0ns0jqb6rxig" path="res://SFX/rewind.mp3" id="3_kposw"]
 [ext_resource type="Texture2D" uid="uid://mu7t6qixvmmq" path="res://Models/Collect/gato_low_gato_Normal.png" id="4_all3d"]
 [ext_resource type="PackedScene" uid="uid://b7n4upksbe0iq" path="res://Models/Collect/lasaña.glb" id="4_krkjt"]
+[ext_resource type="AudioStream" uid="uid://b8e8pi5ns4i32" path="res://SFX/pop-402324.mp3" id="8_all3d"]
 [ext_resource type="Shader" uid="uid://nm6t8k0u3lko" path="res://Shaders/GlowingRing.gdshader" id="8_i6f3t"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_oi7jj"]
@@ -212,7 +212,7 @@ collision_mask = 3
 shape = SubResource("BoxShape3D_gvrau")
 
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
-stream = ExtResource("3_kposw")
+stream = ExtResource("8_all3d")
 volume_db = -5.0
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]

@@ -8,6 +8,7 @@ func _ready():
 	# Conectamos el signal correctamente usando Callable
 	player.connect("reset_game", Callable(self, "_on_player_reset_game"))
 	DialogueManager.show_dialogue_balloon(REMINDER)
+	player.take_damage(-10000)
 	Engine.max_fps = 30
 
 func _on_player_reset_game():

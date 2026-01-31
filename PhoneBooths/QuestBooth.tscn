@@ -1,9 +1,10 @@
-[gd_scene load_steps=20 format=4 uid="uid://oyi202a8oiv5"]
+[gd_scene load_steps=25 format=4 uid="uid://oyi202a8oiv5"]
 
 [ext_resource type="Script" uid="uid://brh2m7ckthpg2" path="res://Test/start_timer.gd" id="1_5jdvi"]
 [ext_resource type="Texture2D" uid="uid://du3aolvd1lm5" path="res://Models/Green sign/exclamation_sign_0.png" id="2_5jdvi"]
 [ext_resource type="Resource" uid="uid://xcp5rjbnumlo" path="res://Dialogues/startMission.dialogue" id="2_n8vei"]
 [ext_resource type="AudioStream" uid="uid://dmud0d35ehih1" path="res://SFX/phoneRing.mp3" id="3_uhn0n"]
+[ext_resource type="Shader" uid="uid://nm6t8k0u3lko" path="res://Shaders/GlowingRing.gdshader" id="5_tuvmf"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vviwj"]
 resource_name = "cabina_ss"
@@ -242,6 +243,24 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_xp07t")
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fnnre"]
+render_priority = 0
+shader = ExtResource("5_tuvmf")
+shader_parameter/glow_color = Color(1, 0.5, 0, 1)
+shader_parameter/glow_strength = 2.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_847sp"]
+material = SubResource("ShaderMaterial_fnnre")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_upcl0"]
+render_priority = 0
+shader = ExtResource("5_tuvmf")
+shader_parameter/glow_color = Color(1, 0.5, 0, 1)
+shader_parameter/glow_strength = 2.0
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_fog5s"]
+material = SubResource("ShaderMaterial_upcl0")
+
 [node name="QuestBooth" type="StaticBody3D"]
 script = ExtResource("1_5jdvi")
 sign_path = NodePath("Node3D")
@@ -332,6 +351,14 @@ spot_angle = 27.002815
 stream = ExtResource("3_uhn0n")
 volume_db = -6.0
 parameters/looping = true
+
+[node name="bola" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.415, 0, 0, 0, 0.415, 0, 0, 0, 0.415, 0, 2.9665706, 0)
+mesh = SubResource("SphereMesh_847sp")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.415, 0, 0, 0, 0.415, 0, 0, 0, 0.415, 0, 3.7132573, 0)
+mesh = SubResource("CapsuleMesh_fog5s")
 
 [connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
 [connection signal="body_exited" from="Area3D" to="." method="_on_area_3d_body_exited"]

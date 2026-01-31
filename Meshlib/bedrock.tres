@@ -1,8 +1,8 @@
 [gd_resource type="MeshLibrary" load_steps=34 format=3 uid="uid://dmyw6mpxosx2n"]
 
 [ext_resource type="Shader" uid="uid://b2gl11jy3pdhy" path="res://Tiles/pista.gdshader" id="1_f1hnr"]
-[ext_resource type="Shader" path="res://Tiles/acera.gdshader" id="2_cq4ow"]
-[ext_resource type="Shader" path="res://Tiles/grass.gdshader" id="3_cq4ow"]
+[ext_resource type="Shader" uid="uid://cug154mbye4wk" path="res://Tiles/acera.gdshader" id="2_cq4ow"]
+[ext_resource type="Shader" uid="uid://b4m45py8dvmg4" path="res://Tiles/grass.gdshader" id="3_cq4ow"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ctcbd"]
 render_priority = 0

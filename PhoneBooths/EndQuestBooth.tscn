@@ -1,8 +1,9 @@
-[gd_scene load_steps=19 format=4 uid="uid://bw0b0bykjtorv"]
+[gd_scene load_steps=24 format=4 uid="uid://bw0b0bykjtorv"]
 
 [ext_resource type="Script" uid="uid://bsraxyqbs77ky" path="res://Test/end_mission.gd" id="1_554wt"]
 [ext_resource type="Texture2D" uid="uid://du3aolvd1lm5" path="res://Models/Green sign/exclamation_sign_0.png" id="1_nxq6b"]
 [ext_resource type="AudioStream" uid="uid://dmud0d35ehih1" path="res://SFX/phoneRing.mp3" id="2_554wt"]
+[ext_resource type="Shader" uid="uid://nm6t8k0u3lko" path="res://Shaders/GlowingRing.gdshader" id="4_m4vqm"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vviwj"]
 resource_name = "cabina_ss"
@@ -241,6 +242,24 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_xp07t")
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_se1id"]
+render_priority = 0
+shader = ExtResource("4_m4vqm")
+shader_parameter/glow_color = Color(1, 0.5, 0, 1)
+shader_parameter/glow_strength = 2.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_q3rnl"]
+material = SubResource("ShaderMaterial_se1id")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_t0qyx"]
+render_priority = 0
+shader = ExtResource("4_m4vqm")
+shader_parameter/glow_color = Color(1, 0.5, 0, 1)
+shader_parameter/glow_strength = 2.0
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_s64pl"]
+material = SubResource("ShaderMaterial_t0qyx")
+
 [node name="EndQuestBooth" type="StaticBody3D"]
 script = ExtResource("1_554wt")
 sign_path = NodePath("Node3D")
@@ -330,6 +349,14 @@ spot_angle = 27.002815
 stream = ExtResource("2_554wt")
 volume_db = -6.0
 parameters/looping = true
+
+[node name="bola" type="MeshInstance3D" parent="Ringtone"]
+transform = Transform3D(0.415, 0, 0, 0, 0.415, 0, 0, 0, 0.415, 0, 2.9665706, 0)
+mesh = SubResource("SphereMesh_q3rnl")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Ringtone"]
+transform = Transform3D(0.415, 0, 0, 0, 0.415, 0, 0, 0, 0.415, 0, 3.7132573, 0)
+mesh = SubResource("CapsuleMesh_s64pl")
 
 [connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
 [connection signal="body_exited" from="Area3D" to="." method="_on_area_3d_body_exited"]

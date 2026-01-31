@@ -74,6 +74,7 @@ var lantern_base_energy := 1.0
 var flicker_timer := 0.0
 var next_flicker_time := 0.0
 
+@onready var pow_effect: CPUParticles3D = $CPUParticles3D2
 
 @onready var step_sound_player: AudioStreamPlayer3D = $StepSoundPlayer
 @onready var epic_animation: AnimationPlayer = $AnimationPlayer
@@ -131,7 +132,7 @@ func take_damage(amount: int) -> void:
 	health -= amount
 	health = max(health, 0)
 	emit_signal("health_changed", health)
-
+	pow_effect.emitting = true
 	if health <= 0:
 		die()
 

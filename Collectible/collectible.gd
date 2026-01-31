@@ -76,7 +76,6 @@ func interact_with_target() -> void:
 		print("💥 Daño aplicado al player (-10)")
 	else:
 		print("⚠️ El target no tiene take_damage()")
-	DialogueManager.show_dialogue_balloon(OBJECT_COLLECTED)
 	audio_stream_player_3d.play()
 	area_3d.queue_free()
 	model_skins.visible = false

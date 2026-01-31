@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="DeliveryMan"
-run/main_scene="uid://cspe7sy7xd42q"
+run/main_scene="uid://lityefmwe5le"
 config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://icon.svg"
 
@@ -24,8 +24,6 @@ AnimationState="*res://Intro/animationState.gd"
 
 [display]
 
-window/size/viewport_width=1920
-window/size/viewport_height=1080
 window/stretch/mode="viewport"
 
 [editor_plugins]
